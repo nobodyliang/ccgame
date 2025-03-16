@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 摘要文档索引</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .dark .card:hover {
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">PDF 摘要文档索引</h1>
+            <p class="text-gray-600 dark:text-gray-400">选择下面的链接查看相应的文档摘要</p>
+        </header>
+
+        <div class="max-w-3xl mx-auto">
+            <div class="grid gap-6">
+                <!-- Gemini2 CPO 分析 -->
+                <a href="pdfsum-Gemini2-CPO-20250316.html" 
+                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Gemini2 CPO 分析</h2>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">中国通信基础设施洞察与CPO技术采用分析</p>
+                        </div>
+                        <span class="text-gray-400 dark:text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Are We There Yet 分析 -->
+                <a href="pdfsum-poe-Are We There Yet-20250313.html" 
+                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Are We There Yet</h2>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">市场分析与投资时机研判</p>
+                        </div>
+                        <span class="text-gray-400 dark:text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- CPO 中文分析 -->
+                <a href="pdfsum-poe-CPO-20250316.html" 
+                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">CPO 分析（中文版）</h2>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">CPO技术详细分析报告</p>
+                        </div>
+                        <span class="text-gray-400 dark:text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- CPO 英文分析 -->
+                <a href="pdfsum-poe-eng-CPO-20250316.html" 
+                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">CPO Analysis (English)</h2>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">Detailed CPO Technology Analysis Report</p>
+                        </div>
+                        <span class="text-gray-400 dark:text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <footer class="text-center mt-12 text-gray-500 dark:text-gray-400">
+            <p>© 2025 PDF摘要索引. 保留所有权利.</p>
+        </footer>
+    </div>
+</body>
+</html>
 
