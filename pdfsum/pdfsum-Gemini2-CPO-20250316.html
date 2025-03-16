@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国通信基础设施洞察 | CPO技术采用分析与投资机会</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        /* 添加自定义样式 */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 深色模式下的卡片样式 */
+         .dark .card {
+              transition: transform 0.2s ease, box-shadow 0.2s ease;
+         }
+         .dark .card:hover {
+                box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+         }
+
+        /* 自定义滚动条样式 (可选) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+         .dark ::-webkit-scrollbar-track {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+         .dark ::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+         }
+
+        /* 按钮样式 */
+         .btn-primary {
+                transition: all 0.2s;
+         }
+          .btn-primary:hover {
+            transform: scale(1.05);
+
+          }
+
+         /* 深色模式下自定义样式 */
+         .dark .bg-gray-100 {
+              background-color: #1a202c; /* 深灰色背景 */
+         }
+         .dark .text-gray-800 {
+               color: #cbd5e0; /* 浅灰色文本 */
+         }
+        .dark .border-gray-200 {
+                border-color: #4a5568
+         }
+
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans smooth-scroll">
+    <div class="container mx-auto px-4 py-8">
+        <!-- 头部 -->
+        <header class="mb-10">
+            <h1 class="text-3xl font-bold">中国通信基础设施洞察</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">CPO技术采用分析与投资机会 (基于Citi Research报告)</p>
+         <div class="mt-6">
+           <button id="theme-toggle"
+             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+             切换主题
+           </button>
+         </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main>
+            <!-- 关键信息概要 -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">关键信息概要</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 卡片1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                        <h3 class="text-lg font-semibold mb-2">CPO 技术采用</h3>
+                        <p>虽然 Nvidia 可能在其 GTC 大会上推出 CPO 交换机，但预计 CPO 交换机的采用需要时间，并将在 2028-29 年逐步达到
+                            ~25-30%。</p>
+                    </div>
+                    <!-- 卡片2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                        <h3 class="text-lg font-semibold mb-2">投资机会</h3>
+                        <p>看好 T&S/TFC Optical 作为网络渠道扩张中的赢家。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CPO技术与市场分析 (示例) -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">CPO技术与市场分析</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                <p>本节将详细介绍CPO技术原理、优势、挑战，以及市场规模预测和厂商竞争格局。</p>
+                <p>例如：此处可以插入CPO原理的图片或图表。</p>
+                </div>
+            </section>
+
+            <!-- 重点公司分析 (示例) -->
+           <section class="mb-12">
+             <h2 class="text-2xl font-semibold mb-4">重点公司分析</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+               <!-- 公司卡片 1 -->
+               <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                 <h3 class="text-lg font-semibold mb-2">T&S通讯 (300570.SZ)</h3>
+                 <p>公司概况、投资亮点、风险、估值等信息将在此处详细展示。</p>
+               </div>
+               <!-- 公司卡片 2 (可根据需要增加) -->
+               <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                 <h3 class="text-lg font-semibold mb-2">苏州天孚光电 (300394.SZ)</h3>
+                 <p>公司概况、投资亮点、风险、估值等信息。</p>
+               </div>
+
+               <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                 <h3 class="text-lg font-semibold mb-2">Eoptolink Technology (300502.SZ)</h3>
+                 <p>公司概况、投资亮点、风险、估值等信息。</p>
+               </div>
+
+               <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                 <h3 class="text-lg font-semibold mb-2">Innolight (300308.SZ)</h3>
+                 <p>公司概况、投资亮点、风险、估值等信息。</p>
+               </div>
+
+             </div>
+           </section>
+
+            <!-- 估值与投资建议 -->
+            <section>
+                <h2 class="text-2xl font-semibold mb-4">估值与投资建议</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 card">
+                <p>本节将总结所有公司的估值比较,和综合投资建议</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="mt-12 text-center text-gray-500 dark:text-gray-400">
+            <p>作者: [作者姓名]</p>
+            <p>
+                <a href="https://twitter.com/[你的Twitter账号]" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-blue-500">
+                    <i class="fab fa-twitter"></i> Twitter/X
+                </a>
+                 | <a> 更多链接 </a> <!-- 添加更多社交媒体链接 -->
+            </p>
+            <p>© 2024 [你的名字或公司]. 版权所有.</p>
+        </footer>
+    </div>
+ <script>
+  // 深浅模式切换逻辑
+  const themeToggleBtn = document.getElementById('theme-toggle');
+
+  themeToggleBtn.addEventListener('click', () => {
+
+   // if set via local storage previously
+   if (localStorage.getItem('color-theme')) {
+    if (localStorage.getItem('color-theme') === 'light') {
+     document.documentElement.classList.add('dark');
+     localStorage.setItem('color-theme', 'dark');
+    } else {
+     document.documentElement.classList.remove('dark');
+     localStorage.setItem('color-theme', 'light');
+    }
+
+    // if NOT set via local storage previously
+   } else {
+    if (document.documentElement.classList.contains('dark')) {
+     document.documentElement.classList.remove('dark');
+     localStorage.setItem('color-theme', 'light');
+    } else {
+     document.documentElement.classList.add('dark');
+     localStorage.setItem('color-theme', 'dark');
+    }
+   }
+
+  });
+
+ </script>
+</body>
+
+</html>
