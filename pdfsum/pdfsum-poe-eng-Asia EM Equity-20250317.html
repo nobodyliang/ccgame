@@ -1,0 +1,674 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia EM Equity Strategy | Phuket CIO Summit</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Custom emphasis classes */
+        .highlight-text {
+            color: #1a56db;
+            font-weight: 600;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+            border-radius: 2px;
+            width: 80px;
+            margin: 1rem 0;
+        }
+        
+        /* Custom animation for charts */
+        .chart-animate {
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="bg-gray-900 text-white py-6">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div>
+                    <p class="text-blue-300 text-sm uppercase tracking-wider mb-1">Morgan Stanley Research</p>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-1">Asia EM Equity Strategy</h1>
+                    <p class="text-gray-300 text-lg">Phuket CIO Summit - Brave New World</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-gray-400 text-sm">March 11, 2025</p>
+                    <div class="flex items-center mt-2">
+                        <span class="bg-blue-500 text-xs px-2 py-1 rounded font-medium">Investment Presentation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 md:px-6 lg:px-8 py-8">
+        <!-- Authors Section -->
+        <section class="mb-12 fade-in">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Research Team</h2>
+            <div class="section-divider"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                <div class="bg-white rounded-lg shadow p-5 card">
+                    <h3 class="font-semibold text-gray-900">Jonathan F Garner</h3>
+                    <p class="text-gray-600 text-sm">Equity Strategist</p>
+                    <p class="text-blue-600 text-sm mt-2">Morgan Stanley Asia (Singapore) Pte.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 card">
+                    <h3 class="font-semibold text-gray-900">Crystal Ng</h3>
+                    <p class="text-gray-600 text-sm">Equity Strategist</p>
+                    <p class="text-blue-600 text-sm mt-2">Morgan Stanley Asia Limited</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 card">
+                    <h3 class="font-semibold text-gray-900">Daniel K Blake</h3>
+                    <p class="text-gray-600 text-sm">Equity Strategist</p>
+                    <p class="text-blue-600 text-sm mt-2">Morgan Stanley Asia (Singapore) Pte.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 card">
+                    <h3 class="font-semibold text-gray-900">Kristal Ji</h3>
+                    <p class="text-gray-600 text-sm">Equity Strategist</p>
+                    <p class="text-blue-600 text-sm mt-2">Morgan Stanley Asia (Singapore) Pte.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section class="mb-12 fade-in" style="animation-delay: 0.2s;">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Key Market Insights</h2>
+            <div class="section-divider"></div>
+            
+            <!-- Insight 1: Earnings Revision Breadth -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 card">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">US Faces Worst Earnings Revision Breadth</h3>
+                    <p class="text-gray-600 mb-4">Monthly data analysis shows US markets experiencing deteriorating earnings revision breadth compared to other major markets.</p>
+                    <div class="chart-container">
+                        <canvas id="revisionsChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Source: IBES, Datastream, Morgan Stanley Research. Data as of February 2025.</p>
+                </div>
+            </div>
+            
+            <!-- Insight 2: Valuation Convergence -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 card">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Valuations Beginning to Converge</h3>
+                    <p class="text-gray-600 mb-4">Historical P/E ratios show a narrowing gap between US and emerging markets, suggesting a potential shift in market dynamics.</p>
+                    <div class="chart-container">
+                        <canvas id="valuationsChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Source: IBES, MSCI, FactSet, Morgan Stanley Research. Data as of March 10, 2025.</p>
+                </div>
+            </div>
+            
+            <!-- Insight 3: ROE vs P/B Analysis -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 card">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">US as ROE Outlier - Potential Vulnerability</h3>
+                    <p class="text-gray-600 mb-4">The US market shows exceptional ROE compared to other global markets, raising questions about sustainability if ROE falls.</p>
+                    <div class="chart-container">
+                        <canvas id="roeChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Source: FactSet, MSCI, RIMES, Morgan Stanley Research. Data as of March 10, 2025.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regional Exposure & Sector Analysis -->
+        <section class="mb-12 fade-in" style="animation-delay: 0.4s;">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Regional Exposure &amp; Sector Analysis</h2>
+            <div class="section-divider"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- North America Revenue Exposure -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Asia/EM Revenue Exposure to North America</h3>
+                        <p class="text-gray-600 mb-4">Taiwan and South Korea show highest revenue dependency on North American markets, creating potential vulnerability.</p>
+                        <div class="chart-container">
+                            <canvas id="revenueExposureChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">Source: Company data, Morgan Stanley Research.</p>
+                    </div>
+                </div>
+                
+                <!-- Semiconductors Valuation -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Asia-Pacific Semiconductors - Elevated Valuations</h3>
+                        <p class="text-gray-600 mb-4">P/Sales ratios remain high compared to historical averages, with clear inverse relationship to subsequent returns.</p>
+                        <div class="chart-container">
+                            <canvas id="semisChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">Source: MSCI, FactSet, Morgan Stanley Research. Data as of March 10, 2025.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sector Recommendations -->
+        <section class="mb-12 fade-in" style="animation-delay: 0.6s;">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Sector Recommendations</h2>
+            <div class="section-divider"></div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 card">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Financials vs. Information Technology</h3>
+                    <p class="text-gray-600 mb-4">Morgan Stanley currently prefers Financials over IT within the EM space, based on valuation and growth prospects.</p>
+                    <div class="chart-container">
+                        <canvas id="sectorsChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Source: FactSet, Morgan Stanley Research. Data as of March 10, 2025.</p>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 text-white">
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <i class="fas fa-lightbulb text-2xl text-yellow-300"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Key Strategic Takeaway</h3>
+                            <p class="mb-0">As US market revisions deteriorate and valuations converge, Morgan Stanley sees improved risk-reward in select EM markets, with preference for Financials over IT sectors. Taiwan and South Korea warrant caution due to high North American revenue exposure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="mb-8 fade-in" style="animation-delay: 0.8s;">
+            <div class="bg-gray-100 border border-gray-300 rounded-lg p-4">
+                <h4 class="text-sm font-semibold text-gray-700 mb-2">Important Disclosures</h4>
+                <p class="text-xs text-gray-600">Morgan Stanley does and seeks to do business with companies covered in Morgan Stanley Research. As a result, investors should be aware that the firm may have a conflict of interest that could affect the objectivity of Morgan Stanley Research. Investors should consider Morgan Stanley Research as only a single factor in making their investment decision.</p>
+                <p class="text-xs text-gray-600 mt-2">For analyst certification and other important disclosures, refer to the Disclosure Section in the original report.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400 text-sm">© 2025 Morgan Stanley. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-file-pdf"></i> Download PDF
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize charts after slight delay for animation purposes
+            setTimeout(initCharts, 300);
+            
+            // Add fade-in effect to elements as they scroll into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+                observer.observe(el);
+            });
+        });
+        
+        function initCharts() {
+            // Chart 1: Earnings Revision Breadth
+            const revisionsCtx = document.getElementById('revisionsChart').getContext('2d');
+            new Chart(revisionsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan-23', 'Apr-23', 'Jul-23', 'Oct-23', 'Jan-24', 'Apr-24', 'Jul-24', 'Oct-24', 'Jan-25'],
+                    datasets: [{
+                        label: 'S&P 500',
+                        data: [5, 4, 3, -2, -6, -10, -15, -22, -30],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'MSCI China',
+                        data: [-25, -20, -10, -5, 0, 5, 8, 10, 12],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'TOPIX',
+                        data: [-5, 0, 5, 8, 10, 12, 15, 18, 18],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'MSCI Europe',
+                        data: [-10, -8, -6, -4, -2, 0, 5, 8, 10],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Earnings Revision Breadth (%)'
+                            },
+                            min: -35,
+                            max: 20
+                        }
+                    }
+                }
+            });
+            
+            // Chart 2: Valuations Convergence
+            const valuationsCtx = document.getElementById('valuationsChart').getContext('2d');
+            new Chart(valuationsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'S&P 500',
+                        data: [22.5, 23, 24, 22, 21.5, 20.5],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'MSCI EM',
+                        data: [10, 12, 11, 11.5, 12, 12.2],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'MSCI Europe',
+                        data: [14, 15, 13, 13.5, 14, 14.3],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'MSCI China',
+                        data: [13, 14, 10, 10.5, 11.2, 11.5],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }, {
+                        label: 'TOPIX',
+                        data: [14, 13.5, 12.5, 13, 13.2, 13.5],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'P/E Ratio'
+                            },
+                            min: 8,
+                            max: 26
+                        }
+                    }
+                }
+            });
+            
+            // Chart 3: ROE vs P/B Scatter Plot
+            const roeCtx = document.getElementById('roeChart').getContext('2d');
+            new Chart(roeCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Countries',
+                        data: [
+                            {x: 19, y: 4.5, label: 'US'},
+                            {x: 10, y: 1.2, label: 'China'},
+                            {x: 13, y: 2.5, label: 'Taiwan'},
+                            {x: 11, y: 1.1, label: 'Korea'},
+                            {x: 15, y: 3.5, label: 'India'},
+                            {x: 9, y: 1.5, label: 'Brazil'},
+                            {x: 12, y: 2.1, label: 'Japan'},
+                            {x: 10, y: 1.8, label: 'UK'},
+                            {x: 11, y: 1.6, label: 'Germany'},
+                            {x: 14, y: 2.7, label: 'France'},
+                            {x: 10, y: 1.3, label: 'Indonesia'},
+                            {x: 8, y: 1.0, label: 'Malaysia'}
+                        ],
+                        backgroundColor: (context) => {
+                            const value = context.raw.label;
+                            return value === 'US' ? '#ef4444' : 
+                                   value === 'China' ? '#f59e0b' : 
+                                   value === 'Japan' ? '#3b82f6' : '#64748b';
+                        },
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const point = context.raw;
+                                    return point.label + ': (ROE: ' + point.x + '%, P/B: ' + point.y + 'x)';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Trailing ROE (%)'
+                            },
+                            min: 6,
+                            max: 20
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Price to Book (x)'
+                            },
+                            min: 0.5,
+                            max: 5
+                        }
+                    }
+                }
+            });
+            
+            // Chart 4: Revenue Exposure to North America
+            const revenueCtx = document.getElementById('revenueExposureChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Taiwan', 'South Korea', 'India', 'China', 'Japan', 'Indonesia', 'Thailand', 'Malaysia'],
+                    datasets: [{
+                        label: 'Revenue Exposure to North America (%)',
+                        data: [42, 38, 25, 22, 18, 15, 12, 10],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(59, 130, 246, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Revenue Exposure (%)'
+                            },
+                            max: 50
+                        }
+                    }
+                }
+            });
+            
+            // Chart 5: Semiconductors P/Sales
+            const semisCtx = document.getElementById('semisChart').getContext('2d');
+            new Chart(semisCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'Asia-Pac Semis Price to Sales (x)',
+                        data: [2.5, 2.8, 3.5, 6.8, 4.5, 5.2, 6.5, 5.8],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Subsequent 2Yr Total Return %',
+                        data: [80, 90, 150, -20, 45, 60, null, null],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3,
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Price to Sales (x)'
+                            },
+                            min: 0,
+                            max: 8
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Subsequent 2Yr Return (%)'
+                            },
+                            min: -50,
+                            max: 200,
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        }
+                    }
+                }
+            });
+            
+            // Chart 6: Financials vs IT
+            const sectorsCtx = document.getElementById('sectorsChart').getContext('2d');
+            new Chart(sectorsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan-23', 'Apr-23', 'Jul-23', 'Oct-23', 'Jan-24', 'Apr-24', 'Jul-24', 'Oct-24', 'Jan-25', 'Mar-25'],
+                    datasets: [{
+                        label: 'MSCI EM Financials / MSCI EM IT Ratio',
+                        data: [95, 92, 90, 95, 100, 105, 115, 125, 140, 145],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    yMin: 100,
+                                    yMax: 100,
+                                    borderColor: '#64748b',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5],
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Relative Performance (Jan-21 = 100)'
+                            },
+                            min: 80,
+                            max: 150
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+
+</body></html>

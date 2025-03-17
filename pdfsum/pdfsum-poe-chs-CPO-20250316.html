@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="zh-CN" class="scroll-smooth"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPO技术市场分析报告 | 花旗研究</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        // 检查用户的颜色方案偏好
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .dark {
+            color-scheme: dark;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 4px;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(75, 85, 99, 0.5);
+        }
+        
+        /* 自定义图表样式 */
+        .chart-bar {
+            transition: width 1s ease-out;
+        }
+        
+        /* 淡入动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 卡片悬停效果 */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .dark .hover-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.05), 0 10px 10px -5px rgba(255, 255, 255, 0.02);
+        }
+        
+        /* 按钮悬停效果 */
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white dark:bg-gray-800 shadow-sm z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-9v4h2v-4h3l-4-4-4 4h3z"></path>
+                        </svg>
+                        <span class="ml-2 text-xl font-semibold">CPO市场分析</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#overview" class="border-b-2 border-blue-500 text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            概述
+                        </a>
+                        <a href="#market-forecast" class="border-transparent hover:border-gray-300 dark:hover:border-gray-600 border-b-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            市场预测
+                        </a>
+                        <a href="#components" class="border-transparent hover:border-gray-300 dark:hover:border-gray-600 border-b-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            关键组件
+                        </a>
+                        <a href="#companies" class="border-transparent hover:border-gray-300 dark:hover:border-gray-600 border-b-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            公司分析
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none">
+                        <svg id="dark-icon" class="hidden h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="light-icon" class="hidden h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24">
+        <!-- 标题部分 -->
+        <div class="text-center mb-16 fade-in">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4">CPO技术即将到来，但需时间普及</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                花旗研究：网络光通信组件市场分析与投资机会
+            </p>
+            <div class="flex justify-center mt-6">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                    <svg class="mr-1.5 h-2 w-2 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 8 8">
+                        <circle cx="4" cy="4" r="3"></circle>
+                    </svg>
+                    发布日期: 2025年3月11日
+                </span>
+            </div>
+        </div>
+
+        <!-- 概述部分 -->
+        <section id="overview" class="mb-20 fade-in">
+            <h2 class="text-3xl font-bold mb-8 border-b pb-2 border-gray-200 dark:border-gray-700">花旗观点</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
+                <p class="text-lg mb-6">
+                    尽管英伟达可能在其GTC大会上推出CPO交换机，但我们预计CPO交换机的采用将需要时间，并逐渐在2028-29年达到约25-30%的渗透率。
+                    因此，2026-27年传输器厂商与CPO相关厂商可能会实现并行增长。用于xPU互连的CPO Scale-up (OIO)长期而言仍是光学领域的有利市场。
+                </p>
+                <p class="text-lg mb-6">
+                    我们预测CPO交换机出货量（包括2027年可能的OIO试验）将在2025/26/27年分别达到300/5000/100000台。
+                    在网络领域，我们认为ELSFP、FAU、光纤连接器和Fiber Shuffle是内部关键组件，
+                    而T&amp;S将受益于不断增长的fiber shuffle需求，TFC将享受CPO/OIO中ELSFP/FAU连接器的增长红利。
+                </p>
+                <p class="text-lg">
+                    我们认为这两家公司都是CPO发展的主要受益者，因为它们将从未来不断增加的通道数量中获益。
+                    我们修订了对T&amp;S、TFC、Innolight和Eoptolink的预测，同时在GTC前为T&amp;S和TFC开启30天上行催化剂观察。
+                    T&amp;S是我们行业的首选，其次是TFC。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">CPO即将推出？OIO可能于2027/28年到来</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        我们预计英伟达的CPO解决方案将于2025年开始样品试用，今年将推出1-2个版本，包括一个用于InfiniBand和一个用于以太网(Spectrum X)，
+                        而根据我们的调查，明年可能会看到CPO为Rubin推出的量产型号。尽管CPO可能即将推出，
+                        但我们认为CPO的规模扩展正为2027/28年xPU互连的OIO铺平道路，以提高带宽密度/功率效率，这是一个长期有利可图的光学市场。
+                    </p>
+                </div>
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">关键网络组件与主要赢家</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        我们认为FAU（光纤阵列单元）/连接器、ELSFP（外部激光小型可插拔模块）、Fiber Shuffle是CPO/OIO的关键组件，
+                        我们预测FAU/ELSFP/Fiber Shuffle的市场规模到2027年可能达到30亿/107亿/33亿人民币。
+                        这些组件的内容价值将随着通道数量的增加而增长，初始内容价值可达到100美元/1100美元/7000-14000美元（1或2个Fiber Shuffle解决方案）。
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 市场预测部分 -->
+        <section id="market-forecast" class="mb-20 fade-in">
+            <h2 class="text-3xl font-bold mb-8 border-b pb-2 border-gray-200 dark:border-gray-700">市场预测</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">CPO交换机采用预测</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>2025年预测</span>
+                                <span>300台</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="chart-bar bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style="width: 0.3%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>2026年预测</span>
+                                <span>5,000台</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="chart-bar bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style="width: 5%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>2027年预测</span>
+                                <span>100,000台</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="chart-bar bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+                        注：2027年数据包括OIO试验，OIO的量产可能在2028年开始
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">CPO技术渗透率预测</h3>
+                    <div class="h-64 relative">
+                        <!-- 简化的图表表示 -->
+                        <div class="absolute bottom-0 left-0 w-full h-full flex items-end">
+                            <div class="w-1/4 h-8 bg-blue-100 dark:bg-blue-900 flex justify-center items-center text-xs">
+                                2025: 1%
+                            </div>
+                            <div class="w-1/4 h-28 bg-blue-300 dark:bg-blue-700 flex justify-center items-center text-xs">
+                                2026: 14%
+                            </div>
+                            <div class="w-1/4 h-60 bg-blue-500 dark:bg-blue-500 flex justify-center items-center text-xs text-white">
+                                2027: 25%
+                            </div>
+                            <div class="w-1/4 h-72 bg-blue-700 dark:bg-blue-300 flex justify-center items-center text-xs text-white dark:text-gray-800">
+                                2028-29: 30%
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+                        我们预计CPO在800G+产品中的渗透率将在2026/27年分别达到1%/14%，因此传输器厂商和CPO厂商可能会在近期实现并行增长。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-6">CPO市场关键组件预测 (2025-2027)</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">组件</th>
+                                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">2025年市场规模</th>
+                                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">2026年市场规模</th>
+                                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-900 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">2027年市场规模</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">FAU/连接器</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">800万人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">1.96亿人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">30亿人民币</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">ELSFP</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">4300万人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">8.24亿人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">107亿人民币</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Fiber Shuffle</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">900万人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">2.21亿人民币</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">33亿人民币</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 关键组件部分 -->
+        <section id="components" class="mb-20 fade-in">
+            <h2 class="text-3xl font-bold mb-8 border-b pb-2 border-gray-200 dark:border-gray-700">关键组件分析</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="h-12 w-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-microchip text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">FAU/连接器</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        光纤阵列单元 (FAU) 是连接单模光纤和OE (PIC) 的关键组件，通过PIC内的波导进行光学耦合。
+                    </p>
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-gray-500 dark:text-gray-400">初始单价</span>
+                        <span class="text-blue-600 dark:text-blue-400">~$100</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-medium mt-1">
+                        <span class="text-gray-500 dark:text-gray-400">2027年预期单价</span>
+                        <span class="text-blue-600 dark:text-blue-400">~$65</span>
+                    </div>
+                </div>
+                
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="h-12 w-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-laser-pointer text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">ELSFP</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        外部激光小型可插拔模块 (ELSFP) 是一种面板可插拔形式，容纳连续波激光器，通过偏振保持光纤为PIC提供光功率。
+                    </p>
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-gray-500 dark:text-gray-400">初始单价</span>
+                        <span class="text-green-600 dark:text-green-400">~$1,100</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-medium mt-1">
+                        <span class="text-gray-500 dark:text-gray-400">2027年预期单价</span>
+                        <span class="text-green-600 dark:text-green-400">~$465</span>
+                    </div>
+                </div>
+                
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="h-12 w-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-network-wired text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fiber Shuffle</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Fiber Shuffle在CPO交换机/OIO中扮演关键角色，解决多平面拓扑下不同交换机ASIC中光学引擎连接的光纤长度不一致问题。
+                    </p>
+                    <div class="flex justify-between text-sm font-medium">
+                        <span class="text-gray-500 dark:text-gray-400">初始内容价值</span>
+                        <span class="text-purple-600 dark:text-purple-400">~$7,000-14,000</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-medium mt-1">
+                        <span class="text-gray-500 dark:text-gray-400">定价基础</span>
+                        <span class="text-purple-600 dark:text-purple-400">每通道~$4</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-6">组件性能与发展趋势</h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-medium text-lg mb-2">CPO交换机的带宽升级</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            由CPO技术支持，我们认为下一代CPO产品的总带宽升级速度可能快于传统网络交换机的2倍，可能达到约4倍。
+                            根据我们的调查，我们预计CPO将随后达到204.8T（以太网）/409.6T（用于Rubin）。
+                        </p>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                                <div class="text-center mb-2 font-medium">带宽提升路线图</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-center p-2">
+                                        <div class="text-sm text-gray-500 dark:text-gray-400">当前</div>
+                                        <div class="font-bold text-blue-600 dark:text-blue-400">115.2T</div>
+                                    </div>
+                                    <div class="text-gray-400">→</div>
+                                    <div class="text-center p-2">
+                                        <div class="text-sm text-gray-500 dark:text-gray-400">以太网</div>
+                                        <div class="font-bold text-blue-600 dark:text-blue-400">204.8T</div>
+                                    </div>
+                                    <div class="text-gray-400">→</div>
+                                    <div class="text-center p-2">
+                                        <div class="text-sm text-gray-500 dark:text-gray-400">Rubin</div>
+                                        <div class="font-bold text-blue-600 dark:text-blue-400">409.6T</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium text-lg mb-2">OIO：未来的潜在市场</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            我们认为领先GPU/ASIC厂商在交换机上采用CPO技术，为未来使用相关技术的xPU互连OIO铺平了道路。
+                            每个交换机托盘内部可放置一个Fiber Shuffle，帮助连接不同的GPU。
+                        </p>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                            <div class="text-sm text-gray-700 dark:text-gray-300">
+                                <span class="font-medium">长期OIO潜力：</span>假设未来约有500k个交换机托盘，OIO的潜在市场规模可能远超CPO交换机。
+                                在带宽/通道增加的情况下，每个网络组件如FAU、ELSFP、Fiber Shuffle的内容价值可能继续上升。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 公司分析部分 -->
+        <section id="companies" class="mb-20 fade-in">
+            <h2 class="text-3xl font-bold mb-8 border-b pb-2 border-gray-200 dark:border-gray-700">公司分析</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">T&amp;S通讯</h3>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full dark:bg-green-900 dark:text-green-200">首选</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">代码</span>
+                            <span class="text-sm font-medium">300570.SZ</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">目标价</span>
+                            <span class="text-sm font-medium">¥129.00 （从¥94.00上调）</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">当前价格</span>
+                            <span class="text-sm font-medium">¥92.62 (2025年3月11日)</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            有望成为通道扩展赢家，在Fiber Shuffle市场占据主导地位。得益于与下游客户Corning的稳固业务关系和一流的产品质量。
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            预计Fiber Shuffle收入将在2025-2027年达到900万/2.21亿/33亿人民币，推动2025-2027年净利润CAGR达75%。
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <h4 class="font-medium mb-2">关键优势</h4>
+                        <ul class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Fiber Shuffle市场占有率预计在未来2-3年达到100%
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Fiber Shuffle产品毛利率较高(~40%)
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                主营业务如MPO、陶瓷套筒和MT铁芯预计在2025-26年保持强劲
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">苏州TFC光通信</h3>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full dark:bg-blue-900 dark:text-blue-200">次选</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">代码</span>
+                            <span class="text-sm font-medium">300394.SZ</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">目标价</span>
+                            <span class="text-sm font-medium">¥140.00 （从¥160.00下调）</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">当前价格</span>
+                            <span class="text-sm font-medium">¥89.56 (2025年3月11日)</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            在无源光学组件领域具有领先优势，与Mellanox/Fabrinet建立了持续的前端研发关系和现有光学引擎生产合作伙伴关系。
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            预计TFC的FAU销售额在2025-2027年将达到800万/1.08亿/12亿人民币，ELSFP销售额为4300万/4.94亿/48亿人民币，推动2025-2027年收入/净利润CAGR达到35%/39%。
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <h4 class="font-medium mb-2">关键优势</h4>
+                        <ul class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                预计在2027年FAU市场占有率达到40%
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                ELSFP作为现有光学引擎的延伸，预计长期市场份额达到45%
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-4 w-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                在CPO/OIO时代有望继续作为合约制造商扮演重要角色
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">Innolight</h3>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">代码</span>
+                            <span class="text-sm font-medium">300308.SZ</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">目标价</span>
+                            <span class="text-sm font-medium">¥130.00 （从¥215.00下调）</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">当前价格</span>
+                            <span class="text-sm font-medium">¥101.78 (2025年3月11日)</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            1.6T需求疲软且机架延迟推迟，InfiniBand推广可能低于预期。然而，大规模1.6T迁移将在2026年开始，而收发器附加率可能会随着更高的机架密度而提升。
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            下调2024E/2025E/2026E预测5%/26%/22%，考虑到800G-1.6T产品出货量降低和2026年国内400G/800G贡献增加以及更高SiPh应用导致的ASP降低。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="hover-card bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">Eoptolink</h3>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">代码</span>
+                            <span class="text-sm font-medium">300502.SZ</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">目标价</span>
+                            <span class="text-sm font-medium">¥150.00 （从¥175.00下调）</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">当前价格</span>
+                            <span class="text-sm font-medium">¥94.30 (2025年3月11日)</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            虽然市场份额增长良好，但仍面临1.6T近期需求不足的挑战。作为Mellanox的光学引擎/收发器的二级供应商，预计今年将面临较低的1.6T需求。
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            预计其400G/800G/1.6T出货量在2025年达到100万/350万/40万，2026年达到18万/410万/190万。上调2024E收益5%，考虑到此前指引，但2025E EPS小幅下调1%；上调2026E EPS 13%，假设1.6T市场份额增加。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 结论部分 -->
+        <section class="mb-20 fade-in">
+            <h2 class="text-3xl font-bold mb-8 border-b pb-2 border-gray-200 dark:border-gray-700">结论与投资建议</h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">关注供应链风险</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    尽管前景看好，CPO可能面临供应链风险，因为可拆卸FAU等的PIC/胶水都是新组件，因此可能出现像NVL72机架延迟一样的延误。
+                    我们调整了T&amp;S、TFC、Innolight、Eoptolink的预测/目标价（详见报告），并在GTC前为T&amp;S/TFC启动30天正面催化剂观察，
+                    因为我们认为它们是OIO/CPO通道扩展的赢家。
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a href="#" class="btn block w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-center transition-all duration-200 dark:bg-blue-500 dark:hover:bg-blue-600">
+                        <i class="fas fa-arrow-up mr-2"></i>
+                        启动T&amp;S 30天正面催化剂观察
+                    </a>
+                    <a href="#" class="btn block w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-center transition-all duration-200 dark:bg-blue-500 dark:hover:bg-blue-600">
+                        <i class="fas fa-arrow-up mr-2"></i>
+                        启动TFC 30天正面催化剂观察
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                <div class="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">投资建议摘要</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-green-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                T&amp;S通讯是我们行业的首选，随后是苏州TFC光通信，两者都将从CPO/OIO相关的通道数量增加中获益。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-green-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                虽然CPO可能即将推出，但我们认为其采用将需要时间，逐渐在2028-29年达到约25-30%的渗透率。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-green-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                2026-27年传输器厂商与CPO相关厂商可能会实现并行增长，长期来看OIO仍是光学领域的有利市场。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">风险因素</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-red-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                CPO供应链的稳定性和成熟度是关键风险，可能导致产品延迟。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-red-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                中美技术争端可能影响国内公司的海外销售。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-red-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300">
+                                光纤激光器供应短缺可能持续到2025年上半年，影响800G产品交付。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- 页脚部分 -->
+    <footer class="bg-white dark:bg-gray-800 pt-12 pb-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">关于报告</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        本报告由花旗研究部发布，为Citigroup Global Markets Inc.的研究报告。
+                        报告不得在中华人民共和国境内分发（不包括香港特别行政区和合格的外国机构投资者）。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">分析师</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-600 dark:text-gray-300 text-sm">Louis Tsang</li>
+                        <li class="text-gray-600 dark:text-gray-300 text-sm">Kyna Wong</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">报告信息</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-600 dark:text-gray-300 text-sm">发布日期：2025年3月11日</li>
+                        <li class="text-gray-600 dark:text-gray-300 text-sm">页数：44页</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
+                <div class="flex flex-col items-center">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        © 2025 Citigroup Inc. 未经Citigroup书面许可，不得重新分发。
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-center space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 作者信息 -->
+            <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
+                <div class="flex flex-col items-center">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                        网页设计与可视化
+                    </p>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">[作者姓名]</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com/yourusername" class="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400">
+                            <i class="fab fa-twitter"></i> <span class="text-sm">@yourusername</span>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                        © 2025 版权所有
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-4 right-4 p-2 rounded-full bg-blue-600 text-white shadow-lg opacity-0 transition-opacity duration-300 hover:bg-blue-700 focus:outline-none dark:bg-blue-500 dark:hover:bg-blue-600">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+    
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('dark-icon');
+        const lightIcon = document.getElementById('light-icon');
+        
+        // 初始化图标显示
+        if (document.documentElement.classList.contains('dark')) {
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+        } else {
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                darkIcon.classList.add('hidden');
+                lightIcon.classList.remove('hidden');
+            } else {
+                localStorage.theme = 'light';
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            }
+        });
+        
+        // 淡入效果
+        const fadeElems = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElems.forEach(elem => {
+            fadeInObserver.observe(elem);
+        });
+        
+        // 回到顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.opacity = '1';
+            } else {
+                backToTopButton.style.opacity = '0';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 图表动画
+        const chartBars = document.querySelectorAll('.chart-bar');
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                chartBars.forEach(bar => {
+                    bar.style.width = bar.style.width;
+                });
+            }, 500);
+        });
+    </script>
+
+
+</body></html>

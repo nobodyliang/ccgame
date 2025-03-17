@@ -1,0 +1,483 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Analysis: Are We There Yet?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.03);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Custom animations for sequential loading */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6 md:py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 fade-in">Are We There Yet?</h1>
+                    <p class="text-lg text-gray-600 mt-1 fade-in delay-1">Is It Time To "Buy The Dip"?</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium py-1 px-2.5 rounded-full">
+                        <i class="fa-solid fa-chart-line mr-1"></i> Market Analysis
+                    </span>
+                    <span class="bg-purple-100 text-purple-800 text-xs font-medium py-1 px-2.5 rounded-full ml-2">
+                        <i class="fa-solid fa-calendar-day mr-1"></i> March 2025
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 md:py-10">
+        <!-- Introduction Section -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8 fade-in delay-2">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Market Overview</h2>
+            <p class="text-gray-700 mb-4">
+                Since its high on February 18, the MSCI World index has fallen 4.6% while the S&amp;P 500 is down 6.2% and just below its 200-day 
+                average which it has been above since November 2023. The Nasdaq has dropped 9.2% with bellwether Nvidia down 20.7%.
+            </p>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+                <p class="text-amber-800">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                    <strong>Key insight:</strong> Although the S&amp;P 500 is down 5.1% since the CGTSPOLL indicator triggered on February 12, 
+                    the average decline is 5.9% with a standard deviation of 4.2%. This means there's around a 15% probability of a 10.1% decline.
+                </p>
+            </div>
+        </section>
+
+        <!-- S&P 500 Analysis -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8 fade-in delay-3">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">S&amp;P 500 Technical Analysis</h2>
+            <p class="text-gray-700 mb-4">
+                The S&amp;P 500 is currently testing its 200-day moving average, which has been a strong support level since November 2023.
+            </p>
+            <div class="chart-container mb-6">
+                <canvas id="spxChart"></canvas>
+            </div>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2"><i class="fa-solid fa-chart-line mr-2 text-blue-600"></i>Current Status</h3>
+                    <p class="text-gray-700">Testing 200-day moving average</p>
+                </div>
+                <div class="flex-1 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2"><i class="fa-solid fa-arrow-trend-down mr-2 text-red-600"></i>Decline</h3>
+                    <p class="text-gray-700">Down 6.2% from recent high</p>
+                </div>
+                <div class="flex-1 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2"><i class="fa-solid fa-gauge-high mr-2 text-amber-600"></i>Probability</h3>
+                    <p class="text-gray-700">15% chance of 10.1% decline</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NVIDIA Analysis -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8 fade-in delay-4">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">NVIDIA Performance</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <p class="text-gray-700 mb-4">
+                        NVIDIA has fallen 15.7% already but a 27% drop to test below $100 has a probability of around 15%. The stock has fallen
+                        through estimated entry levels from the February 14 earnings announcement.
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-700">Current Decline</span>
+                            <span class="font-semibold text-red-600">-15.7%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 58%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>0%</span>
+                            <span>Potential -27%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="chart-container">
+                        <canvas id="nvdaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cryptocurrency Section -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8 fade-in delay-5">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Cryptocurrency Outlook</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <p class="text-gray-700 mb-4">
+                        Ahead of the White House conference, Bitcoin's decline is still below expected levels when the CGTSPOLL hits 18. 
+                        The average decline in Bitcoin is 21.0%, but so far its maximum fall is only 13.8% since February 12.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p class="text-blue-800">
+                            <i class="fa-solid fa-circle-info mr-2"></i>
+                            <strong>Key observation:</strong> There is still hope in this market and risk barometers are not yet at extreme levels. 
+                            Many regional and global equities have very high correlations with Bitcoin and NVIDIA.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="chart-container">
+                        <canvas id="bitcoinChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Indicators -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Market Indicators</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-globe mr-2 text-indigo-600"></i>Global Correlation</h3>
+                    <p class="text-gray-700 mb-3">Pairwise correlation of global equities not at levels where market lows are typically reached.</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                        <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 40%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Low</span>
+                        <span>Current</span>
+                        <span>Bounce Level</span>
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-gauge mr-2 text-red-600"></i>CGUSOVER</h3>
+                    <p class="text-gray-700 mb-3">Currently at -18, far from the -100 oversold level where rallies typically emerge.</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                        <div class="bg-red-600 h-2.5 rounded-full" style="width: 18%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>-100 (Oversold)</span>
+                        <span>-18</span>
+                        <span>0</span>
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-heart-pulse mr-2 text-green-600"></i>Market Sentiment</h3>
+                    <p class="text-gray-700 mb-3">US equities have just dipped into Extreme Fear but not yet at levels that marked previous lows.</p>
+                    <div class="flex justify-center mt-3">
+                        <div class="grid grid-cols-5 gap-1 w-full max-w-xs">
+                            <div class="bg-red-500 text-white text-xs p-2 rounded text-center">Extreme Fear</div>
+                            <div class="bg-red-300 text-white text-xs p-2 rounded text-center">Fear</div>
+                            <div class="bg-gray-300 text-gray-700 text-xs p-2 rounded text-center">Neutral</div>
+                            <div class="bg-green-300 text-white text-xs p-2 rounded text-center">Greed</div>
+                            <div class="bg-green-500 text-white text-xs p-2 rounded text-center">Extreme Greed</div>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center text-sm text-gray-500">
+                        <i class="fa-solid fa-arrow-up text-red-500"></i> Current Position
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-money-bill-trend-up mr-2 text-purple-600"></i>Keyrate Funding Stress</h3>
+                    <p class="text-gray-700 mb-3">Currently at 54.5, still below the 60 level where Fed action has previously been triggered.</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                        <div class="bg-purple-600 h-2.5 rounded-full" style="width: 54.5%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>0</span>
+                        <span>54.5</span>
+                        <span>Fed Action (60+)</span>
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-scale-balanced mr-2 text-amber-600"></i>Risk Parity</h3>
+                    <p class="text-gray-700 mb-3">Equity allocations are dropping but still above December 18 levels. Risk parity funds could reduce exposure further.</p>
+                    <div class="flex items-center gap-2 mt-4">
+                        <i class="fa-solid fa-arrow-down text-red-500"></i>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-amber-600 h-2.5 rounded-full" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Equity exposure declining but room for further reduction</p>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-3"><i class="fa-solid fa-chart-pie mr-2 text-blue-600"></i>Fair Value Assessment</h3>
+                    <p class="text-gray-700 mb-3">Based on fiscal debt framework, fair value is at 5412.3, down 6.1% from current levels.</p>
+                    <div class="flex flex-col gap-2 mt-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Lower Bound</span>
+                            <span class="text-sm font-medium">4637.9</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Fair Value</span>
+                            <span class="text-sm font-medium">5412.3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Resistance Cap</span>
+                            <span class="text-sm font-medium">5850.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="bg-white rounded-xl shadow-sm p-6 fade-in">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Conclusion &amp; Recommendations</h2>
+            <div class="border-l-4 border-red-500 pl-4 mb-6">
+                <p class="text-gray-700 font-medium">For the time being it is too early to buy. Continue selling into bounces.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2"><i class="fa-solid fa-shield mr-2 text-blue-600"></i>Recommended Hedges</h3>
+                    <p class="text-gray-700">Focus hedges on markets like the Eurostoxx, HSI, and FTSE which have not yet corrected and where long positions are likely to be more vulnerable.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2"><i class="fa-solid fa-magnifying-glass mr-2 text-green-600"></i>What to Watch For</h3>
+                    <p class="text-gray-700">The market low is likely to be marked by a rise in intermarket and interasset correlation. US10yr yields may drop down to around 3.95% by the time this sell-off is finished.</p>
+                </div>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg">
+                <h3 class="font-medium text-indigo-800 mb-2"><i class="fa-solid fa-calendar-day mr-2"></i>Upcoming Events</h3>
+                <ul class="text-indigo-700 space-y-2">
+                    <li><i class="fa-solid fa-circle-check mr-2 text-indigo-600"></i>US non-farm payroll numbers release (expected to be softer than market expectations)</li>
+                    <li><i class="fa-solid fa-circle-check mr-2 text-indigo-600"></i>White House conference on Bitcoin</li>
+                    <li><i class="fa-solid fa-circle-check mr-2 text-indigo-600"></i>Trump administration suspending tariffs on Canada and Mexico until April 2</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <h3 class="text-lg font-semibold">Market Analysis Report</h3>
+                    <p class="text-gray-400 text-sm">Source: Citi Trading Strategies</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>© 2025 Market Analysis. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts and Animations -->
+    <script>
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Create S&P 500 Chart
+            const spxCtx = document.getElementById('spxChart').getContext('2d');
+            const spxChart = new Chart(spxCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                    datasets: [{
+                        label: 'S&P 500',
+                        data: [4300, 4400, 4600, 4800, 4900, 5000, 4700],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: '200-day MA',
+                        data: [4200, 4250, 4300, 4400, 4500, 4600, 4700],
+                        borderColor: 'rgb(220, 38, 38)',
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Create NVIDIA Chart
+            const nvdaCtx = document.getElementById('nvdaChart').getContext('2d');
+            const nvdaChart = new Chart(nvdaCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                    datasets: [{
+                        label: 'NVIDIA',
+                        data: [450, 480, 520, 600, 680, 720, 600],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    yMin: 600,
+                                    yMax: 600,
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    label: {
+                                        content: 'Entry Level',
+                                        enabled: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Create Bitcoin Chart
+            const btcCtx = document.getElementById('bitcoinChart').getContext('2d');
+            const btcChart = new Chart(btcCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                    datasets: [{
+                        label: 'Bitcoin',
+                        data: [28000, 34000, 38000, 42000, 52000, 65000, 56000],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</body></html>
