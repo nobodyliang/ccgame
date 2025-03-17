@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Summaries Index</title>
+    <title>PDF总结</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -98,10 +98,7 @@
 <body class="bg-gray-50 text-gray-900 min-h-screen">
     <div class="container mx-auto px-4 py-12">
         <header class="mb-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">PDF Summaries Collection</h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                A collection of market analysis and technology reports summarized for easy reading.
-            </p>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">PDF总结对比</h1>
         </header>
 
         <!-- Report Groups -->
@@ -110,11 +107,8 @@
             <div>
                 <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
                     <i class="fas fa-chart-line mr-2 text-blue-600"></i>
-                    Are We There Yet? / 见底了吗？是时候买入了吗？
+                    文档1 Are We There Yet? / 见底了吗？是时候买入了吗？
                 </h2>
-                <p class="text-gray-600 mb-6">
-                    Analysis of current market conditions and whether it's time to "buy the dip".
-                </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Original PDF -->
@@ -123,7 +117,7 @@
                             <div class="bg-red-100 p-3 rounded-full">
                                 <i class="fas fa-file-pdf text-red-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Original PDF</h3>
+                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Original PDF report on market conditions and investment timing.
@@ -142,7 +136,7 @@
                             <div class="bg-blue-100 p-3 rounded-full">
                                 <i class="fas fa-chart-line text-blue-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Are We There Yet</h3>
+                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Analysis of current market conditions and whether it's time to "buy the dip".
@@ -161,7 +155,7 @@
                             <div class="bg-blue-100 p-3 rounded-full">
                                 <i class="fas fa-chart-line text-blue-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">见底了吗</h3>
+                            <h3 class="ml-4 text-xl font-semibold">中文总结</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             市场波动中的投资机会分析，探讨当前是否是买入时机。
@@ -180,11 +174,9 @@
             <div>
                 <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
                     <i class="fas fa-microchip mr-2 text-purple-600"></i>
-                    CPO Technology Analysis / 中国通信基础设施洞察
+                    文档2 CPO Technology Analysis / 中国通信基础设施洞察
                 </h2>
-                <p class="text-gray-600 mb-6">
-                    Analysis of Co-Packaged Optics technology adoption and investment opportunities.
-                </p>
+
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -194,7 +186,7 @@
                             <div class="bg-red-100 p-3 rounded-full">
                                 <i class="fas fa-file-pdf text-red-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Original PDF</h3>
+                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Original PDF report on market conditions and investment timing.
@@ -213,7 +205,7 @@
                             <div class="bg-purple-100 p-3 rounded-full">
                                 <i class="fas fa-microchip text-purple-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">CPO is Coming But Adoption Takes Time</h3>
+                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Analysis of Co-Packaged Optics technology adoption and investment opportunities.
@@ -226,24 +218,6 @@
                         </div>
                     </a>
                     
-                    <!-- Chinese Summary (Gemini) -->
-                    <a href="pdfsum-Gemini2-chs-CPO-20250316.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-purple-100 p-3 rounded-full">
-                                <i class="fas fa-microchip text-purple-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">中国通信基础设施洞察 (Gemini)</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            CPO技术采用分析与投资机会 基于Citi Research报告。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">2025年3月16日</span>
-                            <span class="lang-badge bg-red-100 text-red-800">
-                                <i class="fas fa-language"></i> 中文
-                            </span>
-                        </div>
-                    </a>
                     
                     <!-- Chinese Summary (POE) -->
                     <a href="pdfsum-poe-chs-CPO-20250316.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -251,7 +225,7 @@
                             <div class="bg-purple-100 p-3 rounded-full">
                                 <i class="fas fa-microchip text-purple-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">CPO技术即将到来 但需时间普及 (POE)</h3>
+                            <h3 class="ml-4 text-xl font-semibold">中文总结</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             CPO技术采用分析与投资机会 POE生成版本。
@@ -270,11 +244,9 @@
             <div>
                 <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
                     <i class="fas fa-globe-asia mr-2 text-green-600"></i>
-                    Asia EM Equity Strategy
+                    文档3 Asia EM Equity Strategy
                 </h2>
-                <p class="text-gray-600 mb-6">
-                    Phuket CIO Summit insights on emerging markets in Asia and investment strategies.
-                </p>
+
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Original PDF -->
@@ -283,7 +255,7 @@
                             <div class="bg-red-100 p-3 rounded-full">
                                 <i class="fas fa-file-pdf text-red-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Original PDF</h3>
+                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Original PDF from Phuket CIO Summit on Asia emerging markets.
@@ -302,7 +274,7 @@
                             <div class="bg-green-100 p-3 rounded-full">
                                 <i class="fas fa-globe-asia text-green-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Asia EM Equity Strategy</h3>
+                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Phuket CIO Summit insights on emerging markets in Asia and investment strategies.
@@ -321,11 +293,9 @@
             <div>
                 <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
                     <i class="fas fa-dollar-sign mr-2 text-yellow-600"></i>
-                    What is going on with US markets
+                    文档4 What is going on with US markets
                 </h2>
-                <p class="text-gray-600 mb-6">
-                    Comparison of current US markets with Hong Kong markets from 3 years ago.
-                </p>
+
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Original PDF -->
@@ -334,7 +304,7 @@
                             <div class="bg-red-100 p-3 rounded-full">
                                 <i class="fas fa-file-pdf text-red-600"></i>
                             </div>
-                            <h3 class="ml-4 text-xl font-semibold">Original PDF</h3>
+                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
                         </div>
                         <p class="text-gray-600 mb-4">
                             Comparison of current US markets with Hong Kong markets from 3 years ago.
@@ -357,9 +327,7 @@
     </div>
 
     <footer class="mt-12 py-6 border-t border-gray-200">
-        <div class="container mx-auto px-4 text-center text-gray-600">
-            <p>© 2025 PDF Summary Collection. All rights reserved.</p>
-        </div>
+
     </footer>
 </body>
 </html>
