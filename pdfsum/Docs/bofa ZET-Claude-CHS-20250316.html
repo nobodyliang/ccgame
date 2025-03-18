@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZTE Corporation 数据报告</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 平滑滚动效果 */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* 淡入动画 */
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans leading-relaxed tracking-wide">
+  <header class="bg-blue-600 text-white py-6 shadow-md">
+    <div class="container mx-auto px-6">
+      <h1 class="text-3xl font-bold">中兴通讯 (ZTE Corporation) 数据报告</h1>
+      <p class="mt-2 text-lg">关键数据分析与核心信息可视化展示</p>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-8 fade-in">
+    <!-- 概述 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 border-b-2 border-blue-600">报告概述</h2>
+      <p class="text-gray-700 leading-relaxed">
+        本报告对中兴通讯进行了全面分析，包括其服务器业务表现、市场竞争优势及未来发展潜力。通过关键数据与图表展示，我们能够更直观地了解其财务数据、市场表现以及行业趋势。
+      </p>
+    </section>
+
+    <!-- 关键数据 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 border-b-2 border-blue-600">关键财务数据</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 数据卡片 -->
+        <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 class="text-blue-600 font-bold text-lg">2025年净收入</h3>
+          <p class="text-3xl font-semibold mt-4">93.97 亿 CNY</p>
+          <p class="text-gray-500 mt-2">同比增长 11.5%</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 class="text-blue-600 font-bold text-lg">2025年每股收益 (EPS)</h3>
+          <p class="text-3xl font-semibold mt-4">1.96 CNY</p>
+          <p class="text-gray-500 mt-2">同比增长 11.5%</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 class="text-blue-600 font-bold text-lg">2025年毛利率</h3>
+          <p class="text-3xl font-semibold mt-4">36.1%</p>
+          <p class="text-gray-500 mt-2">同比下降 3.1%</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 图表展示 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 border-b-2 border-blue-600">服务器业务增长趋势</h2>
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <canvas id="serverGrowthChart" class="w-full h-64"></canvas>
+      </div>
+    </section>
+
+    <!-- 市场分析 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 border-b-2 border-blue-600">市场分析与竞争优势</h2>
+      <ul class="list-disc list-inside text-gray-700">
+        <li class="mb-2">服务器业务占比从 2024 年的 8% 提升至 2025 年的 10%。</li>
+        <li class="mb-2">中兴通讯在国内服务器市场的份额持续扩大，尤其在电信和云服务提供商领域。</li>
+        <li class="mb-2">自研 CPU 芯片提升了公司竞争力，在国内替代需求中表现突出。</li>
+      </ul>
+    </section>
+
+    <!-- 投资建议 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 border-b-2 border-blue-600">投资建议</h2>
+      <p class="text-gray-700 leading-relaxed">
+        鉴于中兴通讯在服务器业务领域的强劲增长潜力，以及中国 IDC 行业的积极前景，我们将中兴通讯的评级从“中性”上调至“买入”，并预计其股价目标为 32.00 HKD（H 股）和 45.00 CNY（A 股）。
+      </p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 中兴通讯数据报告 | 数据来源：BofA Securities</p>
+    </div>
+  </footer>
+
+  <!-- 引入 Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 渲染服务器增长趋势图表
+    const ctx = document.getElementById('serverGrowthChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2022', '2023', '2024', '2025E', '2026E', '2027E'],
+        datasets: [
+          {
+            label: '服务器销售额 (亿 CNY)',
+            data: [6, 8, 10, 12, 14, 16],
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+            fill: true,
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '年份',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: '销售额 (亿 CNY)',
+            },
+          },
+        },
+      },
+    });
+  </script>
+
+
+</body></html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZTE Corporation Investment Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+        }
+        
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #CBD5E0 #EDF2F7;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #EDF2F7;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #CBD5E0;
+            border-radius: 6px;
+        }
+
+        /* Lazy loading */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="text-blue-700">
+                    <i class="fas fa-chart-line text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-blue-800">ZTE Investment Analysis</h1>
+                    <p class="text-sm text-gray-500">BofA Securities Research Report - March 12, 2025</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-gray-600 hover:text-blue-700 transition">Overview</a>
+                <a href="#key-findings" class="text-gray-600 hover:text-blue-700 transition">Key Findings</a>
+                <a href="#analysis" class="text-gray-600 hover:text-blue-700 transition">Analysis</a>
+                <a href="#financials" class="text-gray-600 hover:text-blue-700 transition">Financials</a>
+            </nav>
+            <button class="md:hidden text-gray-500 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3">
+            <div class="flex flex-col space-y-3">
+                <a href="#overview" class="text-gray-600 hover:text-blue-700 transition">Overview</a>
+                <a href="#key-findings" class="text-gray-600 hover:text-blue-700 transition">Key Findings</a>
+                <a href="#analysis" class="text-gray-600 hover:text-blue-700 transition">Analysis</a>
+                <a href="#financials" class="text-gray-600 hover:text-blue-700 transition">Financials</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <div class="inline-block bg-blue-900 bg-opacity-30 px-4 py-1 rounded-full mb-4">
+                    <span class="text-sm font-medium">Rating Upgrade</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-bold mb-6">ZTE Corporation (H/A) Upgrade to Buy</h1>
+                <p class="text-xl md:text-2xl mb-8">Carrier softness well known, server take-off to drive re-rating</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-6">
+                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                        <p class="text-sm">Price Objective</p>
+                        <p class="text-2xl font-bold">HK$32.00</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                        <p class="text-sm">Current Price</p>
+                        <p class="text-2xl font-bold">HK$27.90</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                        <p class="text-sm">Potential Upside</p>
+                        <p class="text-2xl font-bold">+14.7%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Overview Card -->
+        <section id="overview" class="mb-12 fade-in">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Investment Overview</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover-scale">
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="col-span-2">
+                            <h3 class="text-xl font-semibold mb-4">Upgrade to Buy from Neutral on server take-off</h3>
+                            <p class="text-gray-700 mb-4">
+                                We upgrade ZTE-H/ZTE-A to Buy from Neutral, with new price objectives of HK$32/CNY45. The server business 
+                                saw robust expansion in 2024, as China telco/CSP orders took off. Though earnings may be under pressure 
+                                near term due to soft carrier business (~50% mix), we believe ZTE deserves a re-rating.
+                            </p>
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-900 mb-2">Key Investment Catalysts:</h4>
+                                <ul class="list-inside space-y-1 text-gray-700">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                                        <span>China IDCs' positive outlook</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                                        <span>Share-gain potential amid increasing server demand</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                                        <span>In-house CPU capability providing competitive edge</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                After 10-20% correction from February, ZTE-H/ZTE-A still trades below the last peak in 1H23 
+                                (led by AI sentiment) and at a discount to China server peers. We see the valuation supported by 
+                                China IDC's re-rating given market's rising confidence on server demand.
+                            </p>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-5">
+                            <h3 class="text-lg font-semibold mb-4 text-blue-800">Investment Metrics</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-medium">Recommendation</span>
+                                        <span class="font-bold text-blue-700">BUY</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full">
+                                        <div class="h-2 bg-blue-600 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-medium">Price Objective</span>
+                                        <span class="font-bold">HK$32.00</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full">
+                                        <div class="h-2 bg-blue-600 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-medium">Upside Potential</span>
+                                        <span class="font-bold text-green-600">+14.7%</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full">
+                                        <div class="h-2 bg-green-500 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-medium">Dividend Yield (2025E)</span>
+                                        <span class="font-bold">2.6%</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full">
+                                        <div class="h-2 bg-blue-600 rounded-full" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-medium">P/E (2025E)</span>
+                                        <span class="font-bold">13.3x</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full">
+                                        <div class="h-2 bg-blue-600 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Key Findings Section -->
+        <section id="key-findings" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Key Investment Findings</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Server Business Card -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-scale lazy-load">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full bg-blue-100 p-3 mr-4">
+                                <i class="fas fa-server text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">Server Business Growth</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            ZTE's server sales nearly doubled YoY to CNY10bn in 2024 (8% mix), led by breakthrough at China CSPs and rising delivery to telcos. 
+                            The company started AI server shipments from 4Q24.
+                        </p>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-medium text-gray-900 mb-2">Growth Drivers:</h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-blue-600 mt-1 mr-2"></i>
+                                    <span>CSPs' strong capex (BAT +64%/19% in 2025/26E)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-blue-600 mt-1 mr-2"></i>
+                                    <span>China telcos' increasing focus on IDC</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-blue-600 mt-1 mr-2"></i>
+                                    <span>Rising demand for AI inferencing capabilities</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                <span>Server Sales Growth (YoY)</span>
+                                <span class="font-medium">+95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-green-500 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- In-house CPU Card -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-scale lazy-load">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full bg-purple-100 p-3 mr-4">
+                                <i class="fas fa-microchip text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">In-house CPU Advantage</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            ZTE is one of the few vendors in China that can provide both in-house CPU and system design. This strengthens 
+                            ZTE's competitiveness amid domestic replacement demand.
+                        </p>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-medium text-gray-900 mb-2">Key Advantages:</h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-purple-600 mt-1 mr-2"></i>
+                                    <span>Well-regulated under US's 10-year compliance supervision (till 2028)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-purple-600 mt-1 mr-2"></i>
+                                    <span>Edge in accessing advanced semiconductors vs. other China peers</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-purple-600 mt-1 mr-2"></i>
+                                    <span>Zhufeng CPU (7nm) provides total solution capability</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                <span>In-house products utilization</span>
+                                <span class="font-medium">85-90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-purple-500 rounded-full" style="width: 87%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Analysis Section -->
+        <section id="analysis" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Market Analysis</h2>
+            
+            <!-- Valuation Analysis -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 hover-scale lazy-load">
+                <div class="p-6">
+                    <div class="flex items-center mb-5">
+                        <div class="rounded-full bg-green-100 p-3 mr-4">
+                            <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Valuation Analysis</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-gray-700 mb-4">
+                                We lift ZTE-H's PO to HK$32 (13x 2026E P/E) from HK$21 (8x 2025E P/E), and 
+                                lift ZTE-A's PO to CNY45 (20x 2026E P/E) from CNY31 (13x 2025E P/E). 
+                            </p>
+                            <p class="text-gray-700 mb-4">
+                                We roll over ZTE-H's/ZTE-A's valuation base to 2026 and apply a higher multiple of 
+                                13x/20x, matching the trading range seen during the last AI-driven market in 1H23.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-900 mb-2">Valuation Drivers:</h4>
+                                <ul class="text-gray-700 space-y-2">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-angle-right text-green-600 mt-1 mr-2"></i>
+                                        <span>Server delivery momentum</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-angle-right text-green-600 mt-1 mr-2"></i>
+                                        <span>Market's positive outlook on China IDC industry</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-angle-right text-green-600 mt-1 mr-2"></i>
+                                        <span>Southbound holding percentage risen to 53%</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-angle-right text-green-600 mt-1 mr-2"></i>
+                                        <span>Short interest dropped to 10% (from high of 20-30%)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-3">ZTE-H 1-yr Forward P/E</h4>
+                            <div class="chart-container bg-gray-50 rounded-lg p-4 flex items-center justify-center">
+                                <div id="pe-chart-h" class="w-full h-full"></div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <p class="text-sm text-gray-500">P/E (2025E)</p>
+                                    <p class="text-xl font-bold">13.3x</p>
+                                    <p class="text-sm text-gray-500">vs Historical Mean</p>
+                                    <p class="text-lg font-medium text-blue-600">-1.0 SD</p>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <p class="text-sm text-gray-500">P/E (2026E)</p>
+                                    <p class="text-xl font-bold">11.5x</p>
+                                    <p class="text-sm text-gray-500">vs China Server Peers</p>
+                                    <p class="text-lg font-medium text-blue-600">54% Discount</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Market Trends -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover-scale lazy-load">
+                <div class="p-6">
+                    <div class="flex items-center mb-5">
+                        <div class="rounded-full bg-blue-100 p-3 mr-4">
+                            <i class="fas fa-signal text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Market Trends</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-3">BAT's Capex Trends (2018-2026E)</h4>
+                            <div class="chart-container bg-gray-50 rounded-lg p-4 flex items-center justify-center">
+                                <div id="bat-capex-chart" class="w-full h-full"></div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>The market expects BAT's capex to grow by 64%/19% in 2025/26</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-3">ZTE's x86 Server Market Share in China</h4>
+                            <div class="chart-container bg-gray-50 rounded-lg p-4 flex items-center justify-center">
+                                <div id="market-share-chart" class="w-full h-full"></div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>ZTE had a strong market share expansion since 2022, driven by domestic replacement demand and delivery across telco/CSPs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Financial Estimates Section -->
+        <section id="financials" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Financial Estimates</h2>
+            
+            <!-- Earnings Estimates -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 hover-scale lazy-load">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-4">Key Financial Estimates (2023-2027E)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metric</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2023A</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2024A</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2025E</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2026E</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2027E</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">Net Income (Adjusted - mn)</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">9,326</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">8,425</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">9,397</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">10,854</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">12,572</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">EPS</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.95</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.76</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.96</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.27</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.63</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">EPS Change (YoY)</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">14.3%</td>
+                                    <td class="px-4 py-3 text-sm text-red-600 text-right">-9.7%</td>
+                                    <td class="px-4 py-3 text-sm text-green-600 text-right">11.5%</td>
+                                    <td class="px-4 py-3 text-sm text-green-600 text-right">15.5%</td>
+                                    <td class="px-4 py-3 text-sm text-green-600 text-right">15.8%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">Dividend / Share</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.68</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.62</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.69</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.79</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.92</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">Free Cash Flow / Share</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.80</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.56</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">0.34</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.81</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">1.50</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">P/E</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">13.0x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">14.9x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">13.3x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">11.5x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">9.9x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">Dividend Yield</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.7%</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.4%</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.6%</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">3.0%</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">3.5%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">EV / EBITDA</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">3.0x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">3.5x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">3.2x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.8x</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700 text-right">2.5x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sales Breakdown -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover-scale lazy-load">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-4">Sales Breakdown by Business</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-3">Sales Breakdown by Key Business</h4>
+                            <div class="chart-container bg-gray-50 rounded-lg p-4 flex items-center justify-center">
+                                <div id="sales-breakdown-chart" class="w-full h-full"></div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>ZTE sells server to both carriers and enterprises, with rising sales contribution from government/corporate business</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-3">Sales Growth by Key Business</h4>
+                            <div class="chart-container bg-gray-50 rounded-lg p-4 flex items-center justify-center">
+                                <div id="sales-growth-chart" class="w-full h-full"></div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>Sales growth of government/corporate segment to speed up, led by rising delivery at China CSPs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="text-blue-400">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">ZTE Investment Analysis</h3>
+                    </div>
+                    <p class="text-gray-400 max-w-md">
+                        BofA Securities Research Report, published March 12, 2025.
+                        This analysis provides a comprehensive view of ZTE's investment potential.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#overview" class="text-gray-400 hover:text-white transition">Overview</a>
+                        </li>
+                        <li>
+                            <a href="#key-findings" class="text-gray-400 hover:text-white transition">Key Findings</a>
+                        </li>
+                        <li>
+                            <a href="#analysis" class="text-gray-400 hover:text-white transition">Analysis</a>
+                        </li>
+                        <li>
+                            <a href="#financials" class="text-gray-400 hover:text-white transition">Financials</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-400 text-center">
+                <p>
+                    This research report provides general information only. Copyright © 2025 BofA Securities.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Lazy loading
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('loaded');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.lazy-load').forEach(element => {
+            observer.observe(element);
+        });
+
+        // PE Chart for H-share
+        const peChartH = new Chart(
+            document.getElementById('pe-chart-h'),
+            {
+                type: 'line',
+                data: {
+                    labels: ['Mar-19', 'Sep-19', 'Mar-20', 'Sep-20', 'Mar-21', 'Sep-21', 'Mar-22', 'Sep-22', 'Mar-23', 'Sep-23', 'Mar-24', 'Sep-24', 'Mar-25'],
+                    datasets: [
+                        {
+                            label: 'P/E',
+                            data: [16, 17, 12, 19, 22, 19, 15, 13, 21, 16, 14, 13, 14],
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Mean P/E',
+                            data: [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+                            borderColor: 'rgba(107, 114, 128, 1)',
+                            borderDash: [5, 5],
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: '+1 SD',
+                            data: [22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
+                            borderColor: 'rgba(107, 114, 128, 0.5)',
+                            borderDash: [3, 3],
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: '-1 SD',
+                            data: [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
+                            borderColor: 'rgba(107, 114, 128, 0.5)',
+                            borderDash: [3, 3],
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'P/E Ratio'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            }
+        );
+
+        // BAT Capex Chart
+        const batCapexChart = new Chart(
+            document.getElementById('bat-capex-chart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025E', '2026E'],
+                    datasets: [
+                        {
+                            label: 'Total Capex (CNY bn)',
+                            data: [65, 65, 80, 86, 80, 56, 105, 173, 207],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)'
+                        },
+                        {
+                            label: 'YoY Growth %',
+                            data: [63, 0, 24, 7, -7, -29, 87, 64, 19],
+                            type: 'line',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: false,
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Capex (CNY bn)'
+                            }
+                        },
+                        y1: {
+                            position: 'right',
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'YoY Growth %'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            }
+        );
+
+        // Market Share Chart
+        const marketShareChart = new Chart(
+            document.getElementById('market-share-chart'),
+            {
+                type: 'line',
+                data: {
+                    labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '9M24'],
+                    datasets: [
+                        {
+                            label: 'Market Share %',
+                            data: [1.2, 2.1, 2.5, 1.9, 2.3, 2.8, 3.5, 4.8, 6.2, 8.5],
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Market Share %'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            }
+        );
+
+        // Sales Breakdown Chart
+        const salesBreakdownChart = new Chart(
+            document.getElementById('sales-breakdown-chart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025E', '2026E', '2027E'],
+                    datasets: [
+                        {
+                            label: 'Carriers\' Networks',
+                            data: [65, 67, 58, 53, 50, 47],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)'
+                        },
+                        {
+                            label: 'Government & Corporate',
+                            data: [12, 11, 15, 20, 24, 28],
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)'
+                        },
+                        {
+                            label: 'Consumer',
+                            data: [23, 22, 27, 27, 27, 26],
+                            backgroundColor: 'rgba(236, 72, 153, 0.7)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Percentage %'
+                            },
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            }
+        );
+
+        // Sales Growth Chart
+        const salesGrowthChart = new Chart(
+            document.getElementById('sales-growth-chart'),
+            {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025E', '2026E', '2027E'],
+                    datasets: [
+                        {
+                            label: 'Carriers\' Networks',
+                            data: [2, 4, -15, -1, 3, 2],
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Government & Corporate',
+                            data: [8, -4, 40, 45, 32, 25],
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Consumer',
+                            data: [-5, -2, 20, 8, 8, 5],
+                            borderColor: 'rgba(236, 72, 153, 1)',
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Total',
+                            data: [1, 1, -2, 8, 11, 10],
+                            borderColor: 'rgba(107, 114, 128, 1)',
+                            backgroundColor: 'transparent',
+                            borderDash: [5, 5],
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'YoY Growth %'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            }
+        );
+    </script>
+
+
+</body></html>

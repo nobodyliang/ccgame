@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF总结</title>
+    <title>文档资料库</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                        'primary': '#5E6AD2',
+                        'primary-light': '#8F96E8',
+                        'neutral-50': '#F8F8F8',
+                        'neutral-100': '#F1F1F1',
+                        'neutral-200': '#E1E1E1',
+                        'neutral-700': '#383838',
+                        'neutral-800': '#222222',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
                         }
                     }
                 }
@@ -32,298 +35,309 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
         }
         
-        .card {
-            transition: all 0.3s ease;
+        .document-card {
+            transition: all 0.2s ease;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        .document-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #5E6AD2;
         }
         
-        .dark .card:hover {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        /* 懒加载动画 */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
         
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        .lazy-load.loaded {
+            opacity: 1;
         }
         
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        /* 折叠动画 */
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
         }
         
-        .dark ::-webkit-scrollbar-track {
-            background: #1e1e1e;
+        .category-open .category-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
         }
         
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        
-        .dark ::-webkit-scrollbar-thumb {
-            background: #555;
-        }
-        
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background: #777;
-        }
-        
-        /* Language badge styles */
-        .lang-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
+        /* 标签样式 */
+        .tag {
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
             font-size: 0.75rem;
             font-weight: 500;
+            margin-right: 0.5rem;
+            display: inline-block;
         }
         
-        .lang-badge i {
-            margin-right: 0.25rem;
+        .tag-pdf {
+            background-color: #f3f0ff;
+            color: #7c3aed;
+        }
+        
+        .tag-html {
+            background-color: #e0f2fe;
+            color: #0284c7;
+        }
+        
+        .tag-chs {
+            background-color: #ecfdf5;
+            color: #059669;
+        }
+        
+        .tag-eng {
+            background-color: #fff7ed;
+            color: #ea580c;
+        }
+        
+        .tag-claude {
+            background-color: #f5f3ff;
+            color: #8b5cf6;
+        }
+        
+        .tag-manus {
+            background-color: #fef2f2;
+            color: #ef4444;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen">
-    <div class="container mx-auto px-4 py-12">
-        <header class="mb-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">PDF总结对比</h1>
+<body class="bg-neutral-50 text-neutral-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-6xl">
+        <header class="mb-8 animate-fade-in">
+            <h1 class="text-3xl font-bold text-neutral-800 mb-2">文档资料库</h1>
+            <p class="text-neutral-700">浏览、搜索和查看所有可用文档</p>
+            
+            <div class="mt-6 relative">
+                <input type="text" id="search-input" placeholder="搜索文档..." 
+                    class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm transition">
+                <i class="fas fa-search absolute right-3 top-3.5 text-neutral-400"></i>
+            </div>
         </header>
-
-        <!-- Report Groups -->
-        <div class="space-y-16">
-            <!-- Are We There Yet Report Group -->
-            <div>
-                <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
-                    文档1 Are We There Yet? / 见底了吗？是时候买入了吗？
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Original PDF -->
-                    <a href="Are We There Yet.pdf" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-red-100 p-3 rounded-full">
-                                <i class="fas fa-file-pdf text-red-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Original PDF report on market conditions and investment timing.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">PDF Document</span>
-                            <span class="lang-badge bg-gray-100 text-gray-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-                    
-                    <!-- English Summary -->
-                    <a href="pdfsum-poe-eng-Are We There Yet-20250313.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-lines text-blue-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Analysis of current market conditions and whether it's time to "buy the dip".
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">March 13, 2025</span>
-                            <span class="lang-badge bg-blue-100 text-blue-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-                    
-                    <!-- Chinese Summary -->
-                    <a href="pdfsum-poe-chs-Are We There Yet-20250313.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-lines text-blue-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">中文总结</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            市场波动中的投资机会分析，探讨当前是否是买入时机。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">2025年3月13日</span>
-                            <span class="lang-badge bg-red-100 text-red-800">
-                                <i class="fas fa-language"></i> 中文
-                            </span>
-                        </div>
-                    </a>
-                </div>
+        
+        <main class="space-y-6">
+            <!-- 文档分类 -->
+            <div id="documents-container">
+                <!-- 文档内容将通过JavaScript动态加载 -->
             </div>
-            
-            <!-- CPO Technology Report Group -->
-            <div>
-                <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
-                    文档2 CPO Technology Analysis / 中国通信基础设施洞察
-                </h2>
-
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    <!-- Original PDF -->
-                    <a href="Eng-CPO-China Communications Infrastructure 花旗：CPO大报告.pdf" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-red-100 p-3 rounded-full">
-                                <i class="fas fa-file-pdf text-red-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Original PDF report on market conditions and investment timing.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">PDF Document</span>
-                            <span class="lang-badge bg-gray-100 text-gray-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- English Summary -->
-                    <a href="pdfsum-poe-eng-CPO-20250316.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-lines text-blue-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Analysis of Co-Packaged Optics technology adoption and investment opportunities.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">March 16, 2025</span>
-                            <span class="lang-badge bg-blue-100 text-blue-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-                    
-                    
-                    <!-- Chinese Summary (POE) -->
-                    <a href="pdfsum-poe-chs-CPO-20250316.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-lines text-blue-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">中文总结</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            CPO技术采用分析与投资机会 POE生成版本。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">2025年3月16日</span>
-                            <span class="lang-badge bg-red-100 text-red-800">
-                                <i class="fas fa-language"></i> 中文
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Asia EM Equity Strategy Report Group -->
-            <div>
-                <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
-                    文档3 Asia EM Equity Strategy
-                </h2>
-
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Original PDF -->
-                    <a href="Eng - Asia EM Equity Strategy Phuket CIO Summit Brave New World.PDF" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-red-100 p-3 rounded-full">
-                                <i class="fas fa-file-pdf text-red-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Original PDF from Phuket CIO Summit on Asia emerging markets.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">PDF Document</span>
-                            <span class="lang-badge bg-gray-100 text-gray-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-                    
-                    <!-- English Summary -->
-                    <a href="pdfsum-poe-eng-Asia EM Equity-20250317.html" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-file-lines text-blue-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">英文总结</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Phuket CIO Summit insights on emerging markets in Asia and investment strategies.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">March 17, 2025</span>
-                            <span class="lang-badge bg-blue-100 text-blue-800">
-                                <i class="fas fa-language"></i> English
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- US Markets Report -->
-            <div>
-                <h2 class="text-2xl font-semibold mb-6 border-b pb-2 border-gray-200">
-                    文档4 What is going on with US markets
-                </h2>
-
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Original PDF -->
-                    <a href="ENG-withPic-What is going on with us markets -现在美股就是3年前港股.pdf" class="card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center mb-4">
-                            <div class="bg-red-100 p-3 rounded-full">
-                                <i class="fas fa-file-pdf text-red-600"></i>
-                            </div>
-                            <h3 class="ml-4 text-xl font-semibold">原PDF</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Comparison of current US markets with Hong Kong markets from 3 years ago.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">PDF Document</span>
-                            <div class="flex space-x-2">
-                                <span class="lang-badge bg-blue-100 text-blue-800">
-                                    <i class="fas fa-language"></i> English
-                                </span>
-                                <span class="lang-badge bg-red-100 text-red-800">
-                                    <i class="fas fa-language"></i> 中文
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+        </main>
+        
+        <footer class="mt-12 text-center text-neutral-700 text-sm py-4 border-t border-neutral-200">
+            <p>&copy; 2025 文档资料库 | 所有权利保留</p>
+        </footer>
     </div>
-
-    <footer class="mt-12 py-6 border-t border-gray-200">
-
-    </footer>
+    
+    <script>
+        // 文档数据
+        const documents = [
+            { name: "Are We There Yet.pdf", type: "pdf", lang: "", model: "", date: "20250313" },
+            { name: "Are We There Yet-Claude-CHS-20250313.html", type: "html", lang: "chs", model: "claude", date: "20250313" },
+            { name: "Are We There Yet-Claude-ENG-20250313.html", type: "html", lang: "eng", model: "claude", date: "20250313" },
+            { name: "Asia EM Equity Strategy.PDF", type: "pdf", lang: "", model: "", date: "20250317" },
+            { name: "Asia EM Equity Strategy-Claude-ENG-20250317.html", type: "html", lang: "eng", model: "claude", date: "20250317" },
+            { name: "bofa ZET.pdf", type: "pdf", lang: "", model: "", date: "20250316" },
+            { name: "bofa ZET-Claude-CHS-20250316.html", type: "html", lang: "chs", model: "claude", date: "20250316" },
+            { name: "bofa ZET-Claude-ENG-20250316.html", type: "html", lang: "eng", model: "claude", date: "20250316" },
+            { name: "bofa ZET-mini-Claude-CHS-20250316.html", type: "html", lang: "chs", model: "claude", date: "20250316" },
+            { name: "bofa ZET-mini-Claude-ENG-20250316.html", type: "html", lang: "eng", model: "claude", date: "20250316" },
+            { name: "CPO-China Communications Infrastructure.pdf", type: "pdf", lang: "", model: "", date: "" },
+            { name: "CPO-China Communications Infrastructure-Claude-CHS.html", type: "html", lang: "chs", model: "claude", date: "" },
+            { name: "CPO-China Communications Infrastructure-Claude-ENG.html", type: "html", lang: "eng", model: "claude", date: "" },
+            { name: "CPO-China Communications Infrastructure-Manus-CHS.html", type: "html", lang: "chs", model: "manus", date: "" },
+            { name: "Now Slightly Underweight.pdf", type: "pdf", lang: "", model: "", date: "" },
+            { name: "redpointmarketupdate2025.pdf", type: "pdf", lang: "", model: "", date: "20250317" },
+            { name: "redpointmarketupdate2025-Claude-CHS-20250317.html", type: "html", lang: "chs", model: "claude", date: "20250317" },
+            { name: "What is going on with us markets.pdf", type: "pdf", lang: "", model: "", date: "" }
+        ];
+        
+        // 按照文档名称分组
+        function groupDocuments() {
+            const categories = {};
+            
+            documents.forEach(doc => {
+                // 提取主文档名称（不包括模型、语言等后缀）
+                let baseName = doc.name;
+                
+                // 处理文件名获取基础分类名
+                if (doc.name.includes('-Claude-') || doc.name.includes('-Manus-')) {
+                    baseName = doc.name.split('-')[0];
+                }
+                
+                // 特殊处理，将特定分类合并
+                if (doc.name.includes('bofa ZET') || doc.name.includes('bofa ZET-mini')) {
+                    baseName = 'bofa ZET';
+                } else if (doc.name.includes('Are We There Yet')) {
+                    baseName = 'Are We There Yet';
+                } else if (doc.name.includes('CPO-China Communications')) {
+                    baseName = 'CPO-China Communications Infrastructure';
+                } else if (doc.name.includes('redpointmarketupdate2025')) {
+                    baseName = 'redpointmarketupdate2025';
+                } else if (doc.name.includes('Asia EM Equity Strategy')) {
+                    baseName = 'Asia EM Equity Strategy';
+                }
+                
+                if (!categories[baseName]) {
+                    categories[baseName] = [];
+                }
+                
+                categories[baseName].push(doc);
+            });
+            
+            return categories;
+        }
+        
+        // 渲染文档列表
+        function renderDocuments() {
+            const container = document.getElementById('documents-container');
+            const categories = groupDocuments();
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            // 遍历每个分类并渲染
+            Object.keys(categories).sort().forEach((category, index) => {
+                const categoryDocs = categories[category];
+                const categoryNumber = index + 1; // 分类编号，从1开始
+                
+                // 首先按文件类型排序 - PDF排在前面
+                categoryDocs.sort((a, b) => {
+                    if (a.type === 'pdf' && b.type !== 'pdf') return -1;
+                    if (a.type !== 'pdf' && b.type === 'pdf') return 1;
+                    return 0;
+                });
+                
+                // 创建分类容器
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden mb-6 lazy-load';
+                categoryDiv.id = `category-${index}`;
+                
+                // 分类标题
+                const titleBar = document.createElement('div');
+                titleBar.className = 'category-title p-4 border-b border-neutral-200';
+                titleBar.innerHTML = `
+                    <h2 class="text-lg font-semibold text-neutral-800">
+                        <span class="inline-flex items-center justify-center bg-primary text-white rounded-full w-6 h-6 text-sm mr-2">${categoryNumber}</span>
+                        ${category}
+                    </h2>
+                `;
+                
+                // 文档列表
+                const docsList = document.createElement('ul');
+                docsList.className = 'divide-y divide-neutral-100';
+                
+                categoryDocs.forEach((doc, docIndex) => {
+                    const listItem = document.createElement('li');
+                    const fileNumber = `${categoryNumber}.${docIndex + 1}`; // 创建文件编号，格式为 "分类编号.文件编号"
+                    
+                    // 确定文件图标
+                    let fileIcon = doc.type === 'pdf' ? 'fa-file-pdf' : 'fa-file-code';
+                    
+                    // 创建标签
+                    let tags = '';
+                    
+                    if (doc.type) {
+                        tags += `<span class="tag tag-${doc.type.toLowerCase()}">${doc.type.toUpperCase()}</span>`;
+                    }
+                    
+                    if (doc.lang) {
+                        tags += `<span class="tag tag-${doc.lang.toLowerCase()}">${doc.lang.toUpperCase()}</span>`;
+                    }
+                    
+                    if (doc.model) {
+                        tags += `<span class="tag tag-${doc.model.toLowerCase()}">${doc.model}</span>`;
+                    }
+                    
+                    listItem.className = 'document-card p-3 hover:bg-neutral-50 transition-all';
+                    listItem.innerHTML = `
+                        <a href="./Docs/${doc.name}" class="flex items-center gap-3">
+                            <span class="inline-flex items-center justify-center text-primary font-medium min-w-[2.5rem] text-sm">${fileNumber}</span>
+                            <span class="text-primary text-xl"><i class="fas ${fileIcon}"></i></span>
+                            <div class="flex-1">
+                                <div class="font-medium">${doc.name}</div>
+                                <div class="mt-1.5">
+                                    ${tags}
+                                </div>
+                            </div>
+                            <span class="text-neutral-400 hover:text-primary transition-colors">
+                                <i class="fas fa-external-link-alt"></i>
+                            </span>
+                        </a>
+                    `;
+                    
+                    docsList.appendChild(listItem);
+                });
+                
+                categoryDiv.appendChild(titleBar);
+                categoryDiv.appendChild(docsList);
+                container.appendChild(categoryDiv);
+                
+                // 懒加载动画
+                setTimeout(() => {
+                    categoryDiv.classList.add('loaded');
+                }, 100 + index * 100);
+            });
+        }
+        
+        // 搜索功能
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                
+                const categories = document.querySelectorAll('.category');
+                categories.forEach(category => {
+                    const categoryTitle = category.querySelector('.category-title h2').textContent.toLowerCase();
+                    const documents = category.querySelectorAll('.document-card');
+                    
+                    let hasVisibleDocs = false;
+                    
+                    documents.forEach(doc => {
+                        const docName = doc.querySelector('.font-medium').textContent.toLowerCase();
+                        const isVisible = docName.includes(query) || categoryTitle.includes(query);
+                        
+                        doc.style.display = isVisible ? 'block' : 'none';
+                        if (isVisible) hasVisibleDocs = true;
+                    });
+                    
+                    category.style.display = hasVisibleDocs ? 'block' : 'none';
+                });
+            });
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDocuments();
+            setupSearch();
+            
+            // 懒加载实现
+            const lazyLoadObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        lazyLoadObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.lazy-load').forEach(el => {
+                lazyLoadObserver.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

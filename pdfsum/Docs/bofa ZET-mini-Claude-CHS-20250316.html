@@ -1,0 +1,945 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中兴通讯投资评级提升分析</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0070f3;
+            --primary-dark: #0060df;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: #f9fafb;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .table-row {
+            transition: background-color 0.2s ease;
+        }
+        
+        .table-row:hover {
+            background-color: rgba(0, 112, 243, 0.05);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .highlight {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 65%, rgba(0,112,243,0.2) 65%);
+            display: inline;
+        }
+        
+        .quote-box {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--gray-700);
+        }
+
+        /* 自定义数据表格样式 */
+        .data-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+        
+        .data-table td, .data-table th {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-300);
+        }
+        
+        /* 进度条动画 */
+        @keyframes progressAnimation {
+            0% { width: 0; }
+            100% { width: var(--progress-width); }
+        }
+        
+        .progress-bar {
+            position: relative;
+            height: 8px;
+            border-radius: 4px;
+            background-color: var(--gray-200);
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--primary);
+            width: var(--progress-width);
+            animation: progressAnimation 1s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-xl font-bold text-gray-800">投资评级报告</span>
+                <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">2025.03.12</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#summary" class="nav-link text-gray-700 hover:text-blue-600">评级摘要</a>
+                <a href="#server-business" class="nav-link text-gray-700 hover:text-blue-600">服务器业务</a>
+                <a href="#financials" class="nav-link text-gray-700 hover:text-blue-600">财务数据</a>
+                <a href="#valuation" class="nav-link text-gray-700 hover:text-blue-600">估值分析</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="#summary" class="py-2 text-gray-700 hover:text-blue-600">评级摘要</a>
+                <a href="#server-business" class="py-2 text-gray-700 hover:text-blue-600">服务器业务</a>
+                <a href="#financials" class="py-2 text-gray-700 hover:text-blue-600">财务数据</a>
+                <a href="#valuation" class="py-2 text-gray-700 hover:text-blue-600">估值分析</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 报告头部 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8 fade-in">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">中兴通讯 (H股/A股)</h1>
+                    <p class="text-lg text-gray-600 mt-2">评级：从"中性"上调至"买入"</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <div class="flex items-center text-sm">
+                        <span class="text-gray-500">目标价:</span>
+                        <span class="ml-2 font-semibold text-gray-800">32.00 港元 / 45.00 元人民币</span>
+                    </div>
+                    <div class="flex items-center text-sm mt-1">
+                        <span class="text-gray-500">当前价:</span>
+                        <span class="ml-2 font-semibold text-gray-800">27.90 港元 / 37.06 元人民币</span>
+                    </div>
+                    <div class="flex items-center text-sm mt-1">
+                        <span class="text-gray-500">上涨空间:</span>
+                        <span class="ml-2 font-semibold text-green-600">14.7% / 21.4%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 投资评级摘要 -->
+        <section id="summary" class="mb-12 animate-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">投资评级摘要</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="quote-box">
+                    我们将中兴通讯H股/A股评级从"中性"上调至"买入"，设定新的目标价为32港元/45元人民币。
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">评级上调的核心理由</h3>
+                <div class="space-y-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-server text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">服务器业务强劲增长</h4>
+                            <p class="text-gray-600">2024年服务器销售同比增长近一倍至100亿元人民币（占比8%），主要受中国云服务提供商和电信运营商订单推动。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-microchip text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">自研CPU优势</h4>
+                            <p class="text-gray-600">中兴是中国少数能同时提供自研CPU和系统设计的服务器供应商之一，这在国产替代需求中提升了竞争力。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-line text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">估值重估</h4>
+                            <p class="text-gray-600">虽然运营商业务（约50%占比）表现疲软可能会对短期盈利造成压力，但我们相信中兴应该获得估值重估，考虑到中国IDC行业前景积极、服务器需求增加下的市场份额增长潜力以及自研CPU优势。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">估值调整</h3>
+                <p class="text-gray-600">
+                    由于边际压力和运营商业务疲软，我们下调2025-26年盈利预测12-17%。但同时将中兴H股目标价从21港元（8倍2025年市盈率）上调至32港元（13倍2026年市盈率），A股目标价从31元人民币（13倍2025年市盈率）上调至45元人民币（20倍2026年市盈率）。
+                </p>
+                
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stat-card bg-blue-50 p-4 rounded-lg">
+                        <h4 class="text-gray-700 font-medium mb-2">持有力度</h4>
+                        <p class="text-gray-600">南向资金对H股的持股比例已达53%，空头利息百分比从1月高点30%下降至10%。</p>
+                    </div>
+                    <div class="stat-card bg-green-50 p-4 rounded-lg">
+                        <h4 class="text-gray-700 font-medium mb-2">合规优势</h4>
+                        <p class="text-gray-600">中兴在美国10年合规监督下（直至2028年）运营，这使公司在获取先进半导体方面相比其他中国同行具有优势。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关键财务指标概览 -->
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">关键财务指标</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="card bg-white p-5">
+                    <p class="text-gray-500 text-sm">净利润(2024A)</p>
+                    <p class="text-2xl font-bold text-gray-800">84.25亿元</p>
+                    <p class="text-sm text-red-500">同比<i class="fas fa-arrow-down text-xs"></i> 9.7%</p>
+                </div>
+                <div class="card bg-white p-5">
+                    <p class="text-gray-500 text-sm">每股收益(2024A)</p>
+                    <p class="text-2xl font-bold text-gray-800">1.76元</p>
+                    <p class="text-sm text-red-500">同比<i class="fas fa-arrow-down text-xs"></i> 9.7%</p>
+                </div>
+                <div class="card bg-white p-5">
+                    <p class="text-gray-500 text-sm">市盈率(H股/2024A)</p>
+                    <p class="text-2xl font-bold text-gray-800">14.9x</p>
+                    <div class="progress-bar mt-2" style="--progress-width: 65%"></div>
+                </div>
+                <div class="card bg-white p-5">
+                    <p class="text-gray-500 text-sm">股息收益率(2024A)</p>
+                    <p class="text-2xl font-bold text-gray-800">2.4%</p>
+                    <div class="progress-bar mt-2" style="--progress-width: 45%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务器业务分析 -->
+        <section id="server-business" class="mb-12 animate-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">服务器业务分析</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">业务发展概况</h3>
+                    <p class="text-gray-600">
+                        我们看到市场自2024年末以来更加关注中兴的服务器业务机会，而运营商业务疲软的情况早在2024年初就已被市场预期。中兴的服务器销售在2024年同比增长近一倍至100亿元人民币（占比8%），主要源于在中国云服务提供商（字节跳动/BAT等）的突破性进展和对电信运营商的交付增加。中兴也从2024年第四季度开始出货AI服务器。
+                    </p>
+                    <p class="text-gray-600 mt-3">
+                        我们相信这一增长势头将在2025-26年保持强劲，背后支撑因素包括云服务提供商的强劲资本支出（BAT在2025/26年预计增长+64%/19%）和中国电信运营商对数据中心的关注。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">自研芯片能力</h3>
+                        <p class="text-gray-600">
+                            我们认为中兴的自研芯片能力将有助于增强其竞争力并树立长期积极形象，特别是在中国日益增长的国产替代需求中。中兴目前是中国为数不多的能够提供从芯片（祝烽CPU，7nm工艺）到系统的全套解决方案的服务器供应商之一。
+                        </p>
+                        <p class="text-gray-600 mt-3">
+                            中兴的半导体子公司中兴微电子多年来一直在开发自研芯片，涵盖各种网络设备、机顶盒、调制解调器、光纤到房间(FTTR)相关产品以及CPU。目前，85-90%的产品在内部使用，是中兴运营商业务毛利率提升的主要贡献者。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">市场份额与增长</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-gray-700 mb-2">中兴在中国x86服务器市场份额</h4>
+                            <div class="h-64">
+                                <canvas id="marketShareChart"></canvas>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">
+                                数据来源: IDC
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">BAT资本支出趋势</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full data-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">公司</th>
+                                    <th class="text-right">2023</th>
+                                    <th class="text-right">2024</th>
+                                    <th class="text-right">2025E</th>
+                                    <th class="text-right">2026E</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td>阿里巴巴</td>
+                                    <td class="text-right">239.0亿</td>
+                                    <td class="text-right">758.9亿</td>
+                                    <td class="text-right">1,108.0亿</td>
+                                    <td class="text-right">1,396.8亿</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>百度</td>
+                                    <td class="text-right">111.9亿</td>
+                                    <td class="text-right">81.3亿</td>
+                                    <td class="text-right">118.8亿</td>
+                                    <td class="text-right">127.0亿</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>腾讯</td>
+                                    <td class="text-right">213.7亿</td>
+                                    <td class="text-right">213.7亿</td>
+                                    <td class="text-right">503.5亿</td>
+                                    <td class="text-right">543.6亿</td>
+                                </tr>
+                                <tr class="table-row font-semibold bg-gray-50">
+                                    <td>总计</td>
+                                    <td class="text-right">564.5亿</td>
+                                    <td class="text-right">1,053.9亿</td>
+                                    <td class="text-right">1,730.3亿</td>
+                                    <td class="text-right">2,067.3亿</td>
+                                </tr>
+                                <tr class="table-row text-green-600">
+                                    <td>同比增长</td>
+                                    <td class="text-right">-29%</td>
+                                    <td class="text-right">+87%</td>
+                                    <td class="text-right">+64%</td>
+                                    <td class="text-right">+19%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">
+                        数据来源: 彭博社一致预期
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 财务数据 -->
+        <section id="financials" class="mb-12 animate-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">财务数据与预测</h2>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- 4Q24业绩回顾 -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">2024年第四季度业绩回顾</h3>
+                    <p class="text-gray-600 mb-4">
+                        中兴2024年第四季度利润为5.18亿元人民币（环比-76%，同比-65%），低于预期69%/70%，主要由于运营商业务放缓和毛利率下滑。值得注意的是，中兴的季度财务数据有时波动较大，因为关键项目的收入确认时间和特定季度确认的项目类型（如基站与服务器）会对销售和利润率产生重大影响。
+                    </p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full data-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">指标</th>
+                                    <th class="text-right">4Q24</th>
+                                    <th class="text-right">环比</th>
+                                    <th class="text-right">同比</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td>营业收入</td>
+                                    <td class="text-right">312.5亿</td>
+                                    <td class="text-right text-green-600">+13.4%</td>
+                                    <td class="text-right text-red-600">-10.3%</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>毛利润</td>
+                                    <td class="text-right">95.8亿</td>
+                                    <td class="text-right text-red-600">-13.9%</td>
+                                    <td class="text-right text-red-600">-23.7%</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>营业利润</td>
+                                    <td class="text-right">0.96亿</td>
+                                    <td class="text-right text-red-600">-94.5%</td>
+                                    <td class="text-right text-red-600">-89.0%</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>净利润</td>
+                                    <td class="text-right">5.18亿</td>
+                                    <td class="text-right text-red-600">-76.2%</td>
+                                    <td class="text-right text-red-600">-65.1%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 业务细分分析 -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">业务细分分析与预测</h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">业务收入占比预测</h4>
+                            <div class="h-64">
+                                <canvas id="businessSegmentChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">各业务增长率预测</h4>
+                            <div class="h-64">
+                                <canvas id="growthRateChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-medium text-gray-700 mb-3">核心业务洞察</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">运营商网络</span>
+                                <span class="text-sm font-medium text-red-600">预计占比下降</span>
+                            </div>
+                            <div class="progress-bar" style="--progress-width: 85%"></div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                从2022年的65%降至2027年预计的47%，但仍为最大收入来源
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">政企业务</span>
+                                <span class="text-sm font-medium text-green-600">快速增长</span>
+                            </div>
+                            <div class="progress-bar" style="--progress-width: 65%"></div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                预计从2022年的12%增长至2027年的28%，主要受服务器业务推动
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">消费者业务</span>
+                                <span class="text-sm font-medium text-gray-600">稳定</span>
+                            </div>
+                            <div class="progress-bar" style="--progress-width: 45%"></div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                预计保持在25-27%左右，主要包括家庭连接和智能手机业务
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 财务预测 -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">财务预测 (2025-2027)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full data-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">指标</th>
+                                    <th class="text-right">2024A</th>
+                                    <th class="text-right">2025E</th>
+                                    <th class="text-right">2026E</th>
+                                    <th class="text-right">2027E</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td>营业收入(亿元)</td>
+                                    <td class="text-right">1,213.0</td>
+                                    <td class="text-right">1,304.0</td>
+                                    <td class="text-right">1,448.7</td>
+                                    <td class="text-right">1,614.4</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>同比增长</td>
+                                    <td class="text-right text-red-600">-2.4%</td>
+                                    <td class="text-right text-green-600">+7.5%</td>
+                                    <td class="text-right text-green-600">+11.1%</td>
+                                    <td class="text-right text-green-600">+11.4%</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>毛利率</td>
+                                    <td class="text-right">37.9%</td>
+                                    <td class="text-right">36.1%</td>
+                                    <td class="text-right">35.2%</td>
+                                    <td class="text-right">34.3%</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>营业利润(亿元)</td>
+                                    <td class="text-right">74.0</td>
+                                    <td class="text-right">84.5</td>
+                                    <td class="text-right">100.0</td>
+                                    <td class="text-right">118.6</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>净利润(亿元)</td>
+                                    <td class="text-right">84.3</td>
+                                    <td class="text-right">94.0</td>
+                                    <td class="text-right">108.5</td>
+                                    <td class="text-right">125.7</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>每股收益(元)</td>
+                                    <td class="text-right">1.76</td>
+                                    <td class="text-right">1.96</td>
+                                    <td class="text-right">2.27</td>
+                                    <td class="text-right">2.63</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>同比增长</td>
+                                    <td class="text-right text-red-600">-9.7%</td>
+                                    <td class="text-right text-green-600">+11.5%</td>
+                                    <td class="text-right text-green-600">+15.5%</td>
+                                    <td class="text-right text-green-600">+15.8%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 估值分析 -->
+        <section id="valuation" class="mb-12 animate-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">估值分析</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">估值对比</h3>
+                <p class="text-gray-600 mb-4">
+                    2月以来10-20%的股价回调后，中兴H股/A股目前交易于2025年预期13倍/19倍市盈率，低于2023年上半年上一次高点（由AI情绪推动）和中国服务器同行的水平。我们认为估值将受到中国IDC板块重估的支撑，这背后是市场对服务器需求信心的提升，以及AI应用可能加速的预期。
+                </p>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full data-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">公司</th>
+                                <th class="text-right">服务器占比(24)</th>
+                                <th class="text-right">25E市盈率</th>
+                                <th class="text-right">26E市盈率</th>
+                                <th class="text-right">25E股息率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row bg-blue-50">
+                                <td>中兴通讯A股</td>
+                                <td class="text-right">8%</td>
+                                <td class="text-right">18.9x</td>
+                                <td class="text-right">16.3x</td>
+                                <td class="text-right">1.8%</td>
+                            </tr>
+                            <tr class="table-row bg-blue-50">
+                                <td>中兴通讯H股</td>
+                                <td class="text-right">8%</td>
+                                <td class="text-right">13.4x</td>
+                                <td class="text-right">11.6x</td>
+                                <td class="text-right">2.6%</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td>烽火通信</td>
+                                <td class="text-right">&lt;5%</td>
+                                <td class="text-right">30.5x</td>
+                                <td class="text-right">25.4x</td>
+                                <td class="text-right">0.9%</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td>中国联通</td>
+                                <td class="text-right">&lt;60%</td>
+                                <td class="text-right">27.8x</td>
+                                <td class="text-right">23.9x</td>
+                                <td class="text-right">0.7%</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td>浪潮信息</td>
+                                <td class="text-right">100%</td>
+                                <td class="text-right">29.6x</td>
+                                <td class="text-right">24.0x</td>
+                                <td class="text-right">0.4%</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td>曙光信息</td>
+                                <td class="text-right">100%</td>
+                                <td class="text-right">40.7x</td>
+                                <td class="text-right">33.6x</td>
+                                <td class="text-right">0.6%</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td>联想集团</td>
+                                <td class="text-right">20%</td>
+                                <td class="text-right">12.7x</td>
+                                <td class="text-right">11.0x</td>
+                                <td class="text-right">3.0%</td>
+                            </tr>
+                            <tr class="table-row font-semibold">
+                                <td>中国同行平均</td>
+                                <td class="text-right">-</td>
+                                <td class="text-right">25.3x</td>
+                                <td class="text-right">21.2x</td>
+                                <td class="text-right">1.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">目标价调整分析</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">H股</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">之前目标价</span>
+                                <span class="font-medium">21.00港元</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">新目标价</span>
+                                <span class="font-medium text-blue-600">32.00港元</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">目标估值</span>
+                                <span class="font-medium">13倍 2026年市盈率</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">上涨空间</span>
+                                <span class="font-medium text-green-600">+14.7%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">A股</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">之前目标价</span>
+                                <span class="font-medium">31.00元人民币</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">新目标价</span>
+                                <span class="font-medium text-blue-600">45.00元人民币</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">目标估值</span>
+                                <span class="font-medium">20倍 2026年市盈率</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">上涨空间</span>
+                                <span class="font-medium text-green-600">+21.4%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 mt-4">
+                    我们将中兴H股/A股的估值基准向前推进至2026年，并应用更高的倍数13倍/20倍（均为2019年以来的历史交易平均水平），反映中兴的服务器交付情况和市场对中国IDC行业更积极的前景。13倍/20倍市盈率也与中兴H股/A股在2023年上半年最后一次AI驱动市场中的交易区间相匹配。
+                </p>
+                
+                <div class="mt-6">
+                    <h4 class="font-medium text-gray-700 mb-2">估值风险因素</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>运营商业务持续疲软，超出预期</li>
+                        <li>服务器业务增长速度低于预期</li>
+                        <li>整体毛利率因产品组合变化而降低</li>
+                        <li>地缘政治风险和监管不确定性</li>
+                        <li>半导体供应链受限</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-100 py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-500 text-sm">
+                <p>发布日期: 2025年3月12日</p>
+                <p class="mt-1">本报告仅供参考，不构成任何投资建议</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // 如果是移动设备，关闭移动菜单
+                if (window.innerWidth < 768) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // 滚动动画
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        checkScroll(); // 初始检查
+        
+        // 图表数据
+        document.addEventListener('DOMContentLoaded', function() {
+            // 市场份额图表
+            const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+            const marketShareChart = new Chart(marketShareCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '9M24'],
+                    datasets: [{
+                        label: '中兴在中国x86服务器市场份额',
+                        data: [0.5, 1.0, 1.2, 0.8, 1.5, 2.0, 3.5, 4.5, 6.0, 8.5],
+                        fill: false,
+                        borderColor: '#3b82f6',
+                        backgroundColor: '#3b82f6',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '市场份额(%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 业务细分图表
+            const segmentCtx = document.getElementById('businessSegmentChart').getContext('2d');
+            const segmentChart = new Chart(segmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025E', '2026E', '2027E'],
+                    datasets: [
+                        {
+                            label: '运营商网络',
+                            data: [65, 67, 58, 53, 50, 47],
+                            backgroundColor: '#3b82f6'
+                        },
+                        {
+                            label: '政企业务',
+                            data: [12, 11, 15, 20, 24, 28],
+                            backgroundColor: '#10b981'
+                        },
+                        {
+                            label: '消费者业务',
+                            data: [23, 22, 27, 27, 27, 26],
+                            backgroundColor: '#f59e0b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: '占比(%)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 增长率图表
+            const growthCtx = document.getElementById('growthRateChart').getContext('2d');
+            const growthChart = new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025E', '2026E', '2027E'],
+                    datasets: [
+                        {
+                            label: '运营商网络',
+                            data: [-5, -10, -1, 3, 2],
+                            borderColor: '#3b82f6',
+                            backgroundColor: '#3b82f6',
+                            tension: 0.1
+                        },
+                        {
+                            label: '政企业务',
+                            data: [2, 45, 35, 30, 25],
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b981',
+                            tension: 0.1
+                        },
+                        {
+                            label: '消费者业务',
+                            data: [-2, 20, 10, 8, 5],
+                            borderColor: '#f59e0b',
+                            backgroundColor: '#f59e0b',
+                            tension: 0.1
+                        },
+                        {
+                            label: '总体',
+                            data: [-2, 8, 9, 11, 9],
+                            borderColor: '#6b7280',
+                            backgroundColor: '#6b7280',
+                            borderDash: [5, 5],
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: '增长率(%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</body></html>
