@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF 摘要文档索引</title>
+    <title>网站导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,101 +26,58 @@
 <body class="bg-gray-100 dark:bg-gray-900 min-h-screen">
     <div class="container mx-auto px-4 py-12">
         <header class="text-center mb-12">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">PDF 摘要文档索引</h1>
-            <p class="text-gray-600 dark:text-gray-400">选择下面的链接查看相应的文档摘要</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">网站导航</h1>
+            <p class="text-gray-600 dark:text-gray-400">请选择您要访问的项目</p>
         </header>
 
-        <div class="max-w-3xl mx-auto">
-            <div class="grid gap-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- PDF摘要项目 -->
+                <a href="pdfsum/index.html" 
+                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 mb-4 flex items-center justify-center bg-blue-100 dark:bg-blue-900 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">PDF总结</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">查看PDF文档摘要和分析报告</p>
+                    </div>
+                </a>
 
-                <!-- game -->
+                <!-- CCGame项目 -->
                 <a href="ccgame/index.html" 
                    class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">monster游戏</h2>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">monster游戏</p>
-                        </div>
-                        <span class="text-gray-400 dark:text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 mb-4 flex items-center justify-center bg-green-100 dark:bg-green-900 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600 dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                             </svg>
-                        </span>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">游戏中心</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">Monster游戏及其他互动游戏体验</p>
                     </div>
                 </a>
 
-
-
-
-                
-                <!-- Gemini2 CPO 分析 -->
-                <a href="pdfsum/pdfsum-Gemini2-CPO-20250316.html" 
+                <!-- V2V项目 -->
+                <a href="v2v/index.html" 
                    class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Gemini2 CPO 分析</h2>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">中国通信基础设施洞察与CPO技术采用分析</p>
-                        </div>
-                        <span class="text-gray-400 dark:text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 mb-4 flex items-center justify-center bg-purple-100 dark:bg-purple-900 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600 dark:text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                             </svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Are We There Yet 分析 -->
-                <a href="pdfsum/pdfsum-poe-Are We There Yet-20250313.html" 
-                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Are We There Yet</h2>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">市场分析与投资时机研判</p>
                         </div>
-                        <span class="text-gray-400 dark:text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- CPO 中文分析 -->
-                <a href="pdfsum/pdfsum-poe-CPO-20250316.html" 
-                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">CPO 分析（中文版）</h2>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">CPO技术详细分析报告</p>
-                        </div>
-                        <span class="text-gray-400 dark:text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- CPO 英文分析 -->
-                <a href="pdfsum/pdfsum-poe-eng-CPO-20250316.html" 
-                   class="card bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">CPO Analysis (English)</h2>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">Detailed CPO Technology Analysis Report</p>
-                        </div>
-                        <span class="text-gray-400 dark:text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">V2V 项目</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">视频使用</p>
                     </div>
                 </a>
             </div>
         </div>
 
         <footer class="text-center mt-12 text-gray-500 dark:text-gray-400">
-            <p>© 2025 PDF摘要索引. 保留所有权利.</p>
+            <p>© 2025 个人项目导航. 保留所有权利.</p>
         </footer>
     </div>
 </body>
