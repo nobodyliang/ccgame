@@ -1,297 +1,150 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025年市场更新报告</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <title>红点创投2025市场报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#E63946',
+                        'primary-light': '#F8D7DA',
+                        'secondary': '#1D3557',
+                        'secondary-light': '#457B9D',
+                        'light': '#F1FAEE',
+                        'dark': '#1D3557',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #0070f3;
-            --secondary: #6c757d;
-            --background: #f9fafb;
-            --card-bg: #ffffff;
-            --text: #111827;
-            --border: #e5e7eb;
-            --success: #0CAF60;
-            --danger: #E53935;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        .section-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 1px solid var(--border);
         }
         
         .card:hover {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
         .chart-container {
-            height: 300px;
             position: relative;
-            margin-bottom: 1.5rem;
+            height: 300px;
+            margin: 20px 0;
         }
         
-        .stat-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1.5rem;
-            height: 100%;
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1;
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .highlight {
-            color: var(--primary);
-        }
-        
-        .nav-pill {
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-pill:hover {
-            background-color: rgba(0, 112, 243, 0.1);
-            color: var(--primary);
-        }
-        
-        .nav-pill.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.2;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .quote {
-            font-style: italic;
-            border-left: 4px solid var(--primary);
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .trend-up {
-            color: var(--success);
-        }
-        
-        .trend-down {
-            color: var(--danger);
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .data-table th {
-            text-align: left;
-            padding: 0.75rem 1rem;
-            background-color: #f3f4f6;
-            font-weight: 500;
-            color: var(--secondary);
-            font-size: 0.875rem;
-        }
-        
-        .data-table td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .data-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            background-color: rgba(0, 112, 243, 0.1);
-            color: var(--primary);
-            margin-right: 0.5rem;
-        }
-        
-        /* 自定义图表样式 */
-        .bar {
-            height: 24px;
-            border-radius: 4px;
-            background-color: var(--primary);
-            transition: width 1s ease-out;
-        }
-        
-        .bar-container {
-            width: 100%;
-            background-color: #e5e7eb;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-        
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        /* 响应式设计调整 */
         @media (max-width: 768px) {
-            .stat-value {
-                font-size: 1.75rem;
-            }
-            
-            .container {
-                padding: 1rem 0.5rem;
-            }
-            
-            .chart-container {
-                height: 250px;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .stat-value {
-                font-size: 1.5rem;
-            }
-            
             .chart-container {
                 height: 200px;
             }
         }
     </style>
 </head>
-<body>
-    <header class="bg-white shadow-sm py-4 sticky top-0 z-10">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div>
-                <h1 class="text-xl font-bold text-gray-900">市场更新 2025</h1>
-                <p class="text-sm text-gray-500">红点创投 | 市场分析</p>
-            </div>
-            <div class="flex space-x-2">
-                <button class="nav-pill active" id="tab-overview">概览</button>
-                <button class="nav-pill" id="tab-public">公共市场</button>
-                <button class="nav-pill" id="tab-private">私募市场</button>
-                <button class="nav-pill" id="tab-exits">退出渠道</button>
-                <button class="nav-pill" id="tab-ai">AI机遇</button>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-secondary text-white py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4">红点创投市场报告</h1>
+                <p class="text-xl md:text-2xl opacity-90">2025年市场概览与趋势分析</p>
             </div>
         </div>
     </header>
-
-    <main class="container mx-auto px-4 py-8">
-        <!-- 概览部分 -->
-        <section id="section-overview" class="fade-in">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="card p-6">
-                    <h2 class="text-xl font-semibold mb-4">市场摘要</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="text-lg font-medium mb-2">公共市场</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li>宏观经济环境</li>
-                                <li>增长放缓</li>
-                                <li>"赢家通吃"现象的驱动因素</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium mb-2">私募市场</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li>市场是否回暖？</li>
-                                <li>AI与其他领域的市场表现</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium mb-2">退出与流动性</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li>何时（以及如何）能实现退出？</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium mb-2">AI - 代际性机遇</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li>这一平台转变意味着什么？</li>
-                            </ul>
-                        </div>
-                    </div>
+    
+    <!-- Main navigation -->
+    <nav class="sticky top-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between items-center py-3">
+                <div class="flex items-center">
+                    <span class="text-primary font-semibold text-lg">2025市场报告</span>
                 </div>
-                <div class="card p-6">
-                    <h2 class="text-xl font-semibold mb-4">市场趋势亮点</h2>
-                    <div class="space-y-4">
-                        <div class="quote">
-                            "直到贸易政策更加明朗之前，交易者和投资者应该预期持续的波动。" 
-                            <div class="text-sm text-gray-500 mt-1">- Chris Larkin, 摩根士丹利, 2025年3月10日</div>
+                <div class="flex md:hidden">
+                    <button id="menu-toggle" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                <div id="menu" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0">
+                    <ul class="flex flex-col md:flex-row md:space-x-6">
+                        <li><a href="#public-markets" class="block py-2 hover:text-primary">公共市场</a></li>
+                        <li><a href="#private-markets" class="block py-2 hover:text-primary">私募市场</a></li>
+                        <li><a href="#liquidity" class="block py-2 hover:text-primary">流动性与退出</a></li>
+                        <li><a href="#ai-opportunity" class="block py-2 hover:text-primary">AI机遇</a></li>
+                        <li><a href="#conclusions" class="block py-2 hover:text-primary">结论</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+        <!-- Summary Section -->
+        <section class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-secondary">市场概览摘要</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 text-secondary-light">公共市场</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>宏观经济</li>
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>增长去向分析</li>
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>两极分化市场的驱动因素</li>
+                            </ul>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium mb-2">关键发现</h3>
-                            <ul class="space-y-3">
-                                <li class="flex items-center">
-                                    <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-chart-line text-blue-600"></i>
-                                    </span>
-                                    <span>纳斯达克指数接近历史高点，但选举后显著波动</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-users text-blue-600"></i>
-                                    </span>
-                                    <span>CEO信心自选举以来大幅下降</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-robot text-blue-600"></i>
-                                    </span>
-                                    <span>AI投资飙升，领先企业估值溢价显著</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-door-open text-blue-600"></i>
-                                    </span>
-                                    <span>退出渠道仍受限，但有望改善</span>
-                                </li>
+                            <h3 class="text-lg font-semibold mb-3 text-secondary-light">私募市场</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>市场是否已经复苏？</li>
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>AI企业与其他企业的市场表现对比</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 text-secondary-light">流动性与退出</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>何时（以及如何）实现退出？</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 text-secondary-light">AI：世代性机遇</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><i class="fas fa-arrow-right text-primary mr-2"></i>这一平台转变意味着什么？</li>
                             </ul>
                         </div>
                     </div>
@@ -299,1588 +152,742 @@
             </div>
         </section>
 
-        <!-- 公共市场部分 -->
-        <section id="section-public" class="hidden fade-in">
-            <h2 class="text-2xl font-bold mb-6">公共市场</h2>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">宏观层面的担忧增加</h3>
-                <div class="quote">
-                    "说到关税问题，简而言之，它们会提高价格，减缓经济增长，削减利润，增加失业率，加剧不平等，降低生产力并增加全球紧张局势。除此之外，它们挺好的。" 
-                    <div class="text-sm text-gray-500 mt-1">- David Kelly, 摩根大通, 2025年3月3日</div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">高盛研究牛熊市场指标</h4>
-                        <div class="stat-card">
-                            <div class="stat-value">73%</div>
-                            <div class="stat-label">市场风险指标</div>
+        <!-- Public Markets Section -->
+        <section id="public-markets" class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-secondary border-b pb-2">公共市场</h2>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">宏观层面的担忧增加</h3>
+                        <div class="mb-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <blockquote class="italic text-gray-700">
+                                        "直到贸易政策更加明朗之前，交易者和投资者应该预期持续的波动性。"
+                                        <footer class="mt-2 text-sm">— Chris Larkin, 摩根士丹利, 2025年3月10日</footer>
+                                    </blockquote>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <blockquote class="italic text-gray-700">
+                                        "关税绝不可能是积极的。这是一种税收。"
+                                        <footer class="mt-2 text-sm">— Steve Cohen, Point72, 2025年2月25日</footer>
+                                    </blockquote>
+                                </div>
+                            </div>
                         </div>
-                        <div class="quote mt-4">
-                            "关税在某种程度上是一种战争行为...总有人要为此付出代价。" 
-                            <div class="text-sm text-gray-500 mt-1">- Warren Buffett, 伯克希尔哈撒韦, 2025年3月3日</div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">S&amp;P 500在选举后表现</h4>
-                        <p class="mb-3">选举后年份S&amp;P 500的表现指数</p>
-                        <div class="chart-container border rounded p-3">
-                            <!-- 这里可以放图表 -->
-                            <div class="text-center text-gray-500 pt-16">
-                                <i class="fas fa-chart-line text-4xl mb-3"></i>
-                                <p>选举后S&amp;P 500通常出现下跌，但本次跌幅更为严重</p>
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3 text-secondary">高盛研究市场看涨/看跌指标: 73%</h4>
+                            <div class="h-4 w-full bg-gray-200 rounded-full">
+                                <div class="h-4 bg-primary rounded-full" style="width: 73%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">CEO信心自选举以来大幅下降</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">CEO对未来12个月业务展望</h4>
-                        <div class="chart-container border rounded p-3">
-                            <!-- 图表容器 -->
-                            <div class="flex items-end h-48 pt-12">
-                                <div class="w-1/4 px-2">
-                                    <div class="relative h-full">
-                                        <div class="absolute bottom-0 w-full">
-                                            <div class="bar-container">
-                                                <div class="bar" style="width: 80%; background-color: #0070f3;"></div>
-                                            </div>
-                                            <div class="text-center text-sm mt-2">非常有信心</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-1/4 px-2">
-                                    <div class="relative h-full">
-                                        <div class="absolute bottom-0 w-full">
-                                            <div class="bar-container">
-                                                <div class="bar" style="width: 60%; background-color: #38bdf8;"></div>
-                                            </div>
-                                            <div class="text-center text-sm mt-2">有信心</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-1/4 px-2">
-                                    <div class="relative h-full">
-                                        <div class="absolute bottom-0 w-full">
-                                            <div class="bar-container">
-                                                <div class="bar" style="width: 40%; background-color: #f97316;"></div>
-                                            </div>
-                                            <div class="text-center text-sm mt-2">中性</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-1/4 px-2">
-                                    <div class="relative h-full">
-                                        <div class="absolute bottom-0 w-full">
-                                            <div class="bar-container">
-                                                <div class="bar" style="width: 55%; background-color: #ef4444;"></div>
-                                            </div>
-                                            <div class="text-center text-sm mt-2">不乐观</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">选举后的市场表现</h3>
+                        <p class="mb-4 text-gray-700">S&amp;P 500在选举后年份通常会下跌，但本次下跌幅度更为严重。</p>
+                        <div class="chart-container">
+                            <canvas id="electionChart"></canvas>
                         </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">纳斯达克仍接近历史高点</h4>
-                        <div class="mb-4">
-                            <span class="tag">当前 (2025年3月)</span>
-                            <span class="stat-value text-xl">17,468</span>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span>ZIRP峰值</span>
-                                <span class="font-medium">16,573</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>后ZIRP低谷</span>
-                                <span class="font-medium">10,321</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>1年变化</span>
-                                <span class="font-medium trend-up">+15.2%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>美国大选至今</span>
-                                <span class="font-medium trend-down">-7.8%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>年初至今</span>
-                                <span class="font-medium trend-down">-4.5%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">华丽七巨头推动市场上涨，但就职典礼后显著下跌</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">华丽七巨头市值占S&amp;P 500的比例</h4>
-                        <div class="stat-card">
-                            <div class="stat-value">32%</div>
-                            <div class="stat-label">华丽七巨头市值占比</div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">
-                            <i class="fas fa-info-circle mr-1"></i> 华丽七巨头包括亚马逊、苹果、谷歌、Meta、微软、英伟达和特斯拉
-                        </p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">自就职典礼日以来股价变化</h4>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="progress-label">
-                                    <span>华丽七巨头</span>
-                                    <span class="trend-down">-12.3%</span>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3 text-secondary">CEO对未来12个月商业前景的信心</h4>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="bg-red-100 rounded-lg p-3">
+                                    <p class="font-bold text-red-700">28%</p>
+                                    <p class="text-sm text-gray-700">悲观</p>
                                 </div>
-                                <div class="bar-container">
-                                    <div class="bar" style="width: 32%; background-color: #ef4444;"></div>
+                                <div class="bg-yellow-100 rounded-lg p-3">
+                                    <p class="font-bold text-yellow-700">42%</p>
+                                    <p class="text-sm text-gray-700">中性</p>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="progress-label">
-                                    <span>S&amp;P 500</span>
-                                    <span class="trend-down">-7.6%</span>
-                                </div>
-                                <div class="bar-container">
-                                    <div class="bar" style="width: 48%; background-color: #f97316;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="progress-label">
-                                    <span>其他493家公司</span>
-                                    <span class="trend-down">-5.1%</span>
-                                </div>
-                                <div class="bar-container">
-                                    <div class="bar" style="width: 58%; background-color: #eab308;"></div>
+                                <div class="bg-green-100 rounded-lg p-3">
+                                    <p class="font-bold text-green-700">30%</p>
+                                    <p class="text-sm text-gray-700">乐观</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">公共市场中的增长仍然罕见</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">S&amp;P 500科技公司增长分布</h4>
-                        <div class="chart-container border rounded p-3">
-                            <div class="text-center text-gray-500 pt-12">
-                                <p class="font-medium mb-2">在S&amp;P 500科技板块中，</p>
-                                <p class="text-2xl font-bold text-blue-600 mb-2">仅约9%</p>
-                                <p>的公司预计增长率超过20%+</p>
-                                <p class="mt-4 text-sm">S&amp;P科技公司中值预计增长率接近10%</p>
-                            </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">纳斯达克仍接近历史高点</h3>
+                        <p class="mb-2 text-gray-700">当前值 (2025年3月): <span class="font-bold">17,468</span></p>
+                        <div class="chart-container">
+                            <canvas id="nasdaqChart"></canvas>
                         </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">公司优先考虑盈利能力而非增长</h4>
-                        <p class="mb-3">未来12个月收入增长率和自由现金流率中值</p>
-                        <div class="stat-card">
-                            <div class="stat-value">17%</div>
-                            <div class="stat-label">软件公司中值增长率</div>
-                        </div>
-                        <div class="mt-4">
-                            <h5 class="font-medium mb-2">软件公司越来越多地达成预期</h5>
-                            <p class="text-sm text-gray-600">
-                                指引与一致预期比较表明，更多软件公司正在达到或超过分析师预期
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6">
-                <h3 class="text-xl font-semibold mb-4">顶级SaaS公司与其他SaaS公司之间的差距扩大</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">未来12个月收入倍数随时间变化</h4>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span>前10名SaaS公司</span>
-                                <span class="font-medium">14.7倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>其他SaaS公司</span>
-                                <span class="font-medium">4.7倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>COVID前前10名均值</span>
-                                <span class="font-medium">11.4倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>COVID前所有SaaS均值</span>
-                                <span class="font-medium">6.1倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>最大差距(2021年10月)</span>
-                                <span class="font-medium">34.9倍</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">选举后波动对顶级软件公司的影响更大</h4>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span>选举前前10名均值</span>
-                                <span class="font-medium">14.6倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>选举日前10名</span>
-                                <span class="font-medium">15.0倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>选举后高峰前10名</span>
-                                <span class="font-medium trend-up">21.6倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>选举前所有软件均值</span>
-                                <span class="font-medium">5.7倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>选举日所有软件</span>
-                                <span class="font-medium">6.2倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>选举后高峰所有软件</span>
-                                <span class="font-medium trend-up">6.8倍</span>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3 text-secondary">Magnificent 7市值占S&amp;P 500的比例</h4>
+                            <p class="mb-4 text-gray-700">Magnificent 7推动了市场增长，但自就职典礼以来出现了显著抛售。</p>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="bg-primary-light rounded-lg p-3">
+                                    <p class="font-bold text-primary">-32%</p>
+                                    <p class="text-sm text-gray-700">Mag7自就职典礼以来的股价变化</p>
+                                </div>
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="font-bold text-gray-700">32%</p>
+                                    <p class="text-sm text-gray-700">Mag7市值占S&amp;P 500比例</p>
+                                </div>
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="font-bold text-gray-700">68%</p>
+                                    <p class="text-sm text-gray-700">其他493家公司</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- 私募市场部分 -->
-        <section id="section-private" class="hidden fade-in">
-            <h2 class="text-2xl font-bold mb-6">私募市场</h2>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">历史重演：市场在峰值后约2年触底</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-chart-area text-4xl mb-3"></i>
-                        <p>历史周期表明市场触底时间：</p>
-                        <ul class="inline-flex flex-wrap justify-center gap-4 mt-2">
-                            <li><span class="tag">互联网泡沫: 10个季度</span></li>
-                            <li><span class="tag">大衰退: 9个季度</span></li>
-                            <li><span class="tag">当前回弹: 8个季度</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">软件销售环境也在改善</h4>
-                    <div class="grid grid-cols-4 gap-4 mt-4">
-                        <div class="text-center">
-                            <div class="stat-value trend-up">53%</div>
-                            <div class="stat-label">2021年Q4</div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">公共市场增长依然稀缺</h3>
+                        <p class="mb-4 text-gray-700">在S&amp;P 500科技公司中，仅约9%的公司预计增长率超过20%。</p>
+                        <div class="chart-container">
+                            <canvas id="growthDistributionChart"></canvas>
                         </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-down">23%</div>
-                            <div class="stat-label">2022年Q4</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-down">29%</div>
-                            <div class="stat-label">2023年Q4</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-up">57%</div>
-                            <div class="stat-label">2024年Q4</div>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 text-center mt-2">软件销售代表按季度的配额达成率</p>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">A轮融资活动稳定在COVID前水平以下，B轮和C轮融资活动开始回升</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">A轮(&gt;$10M)交易数量</h4>
-                        <div class="chart-container border rounded p-3">
-                            <!-- 图表占位符 -->
-                            <div class="text-center text-gray-500 pt-16">
-                                <i class="fas fa-chart-line text-4xl mb-3"></i>
-                                <p>A轮融资活动趋于稳定</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">B轮(&gt;$20M)+C轮(&gt;$30M)交易数量</h4>
-                        <div class="chart-container border rounded p-3">
-                            <!-- 图表占位符 -->
-                            <div class="text-center text-gray-500 pt-16">
-                                <i class="fas fa-chart-line text-4xl mb-3"></i>
-                                <p>B轮和C轮融资活动开始回升</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">私募市场估值仍高于历史常态，尤其与公共市场相比</h3>
-                <div class="overflow-x-auto">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>年份</th>
-                                <th>高增长软件公司LTM收入倍数</th>
-                                <th>B轮和C轮软件ARR倍数</th>
-                                <th>相对公共市场溢价</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2017</td>
-                                <td>10.6倍</td>
-                                <td>20.2倍</td>
-                                <td>1.91倍</td>
-                            </tr>
-                            <tr>
-                                <td>2018</td>
-                                <td>13.9倍</td>
-                                <td>21.9倍</td>
-                                <td>1.58倍</td>
-                            </tr>
-                            <tr>
-                                <td>2019</td>
-                                <td>15.2倍</td>
-                                <td>31.3倍</td>
-                                <td>2.06倍</td>
-                            </tr>
-                            <tr>
-                                <td>2020</td>
-                                <td>20.9倍</td>
-                                <td>39.7倍</td>
-                                <td>1.90倍</td>
-                            </tr>
-                            <tr>
-                                <td>2021</td>
-                                <td>25.8倍</td>
-                                <td>105.4倍</td>
-                                <td>4.09倍</td>
-                            </tr>
-                            <tr>
-                                <td>2022</td>
-                                <td>14.0倍</td>
-                                <td>85.0倍</td>
-                                <td>6.07倍</td>
-                            </tr>
-                            <tr>
-                                <td>2023</td>
-                                <td>12.5倍</td>
-                                <td>63.5倍</td>
-                                <td>5.08倍</td>
-                            </tr>
-                            <tr>
-                                <td>2024</td>
-                                <td>11.3倍</td>
-                                <td>49.3倍</td>
-                                <td>4.38倍</td>
-                            </tr>
-                            <tr>
-                                <td>2025(YTD)</td>
-                                <td>15.5倍</td>
-                                <td>48.2倍</td>
-                                <td>3.12倍</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">AI创业公司正变得越来越普遍</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">涉及AI创业公司的相关交易百分比</h4>
-                        <div class="chart-container border rounded p-3">
-                            <div class="text-center text-gray-500 pt-16">
-                                <i class="fas fa-robot text-4xl mb-3"></i>
-                                <p>AI交易在我们的交易宇宙中变得更加常见</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">YC看到AI公司激增</h4>
-                        <div class="chart-container border rounded p-3">
-                            <div class="text-center text-gray-500 pt-16">
-                                <i class="fas fa-graduation-cap text-4xl mb-3"></i>
-                                <p>每个YC批次中AI公司的比例随时间增加</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">原生AI应用增长速度比以往更快</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <div class="stat-card">
-                            <div class="text-center">
-                                <p class="font-medium mb-4">AI创业公司达到$5M年化收入的时间比SaaS创业公司</p>
-                                <p class="stat-value trend-up">快约1年</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">达到$5M年化收入所需时间</h4>
-                        <div class="flex justify-between mt-4">
-                            <div class="text-center w-1/2">
-                                <div class="stat-value">24个月</div>
-                                <div class="stat-label">AI创业公司</div>
-                            </div>
-                            <div class="text-center w-1/2">
-                                <div class="stat-value">37个月</div>
-                                <div class="stat-label">SaaS创业公司</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">AI创业公司估值高于非AI企业</h3>
-                <div class="grid grid-cols-1 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">AI与非AI中值融资前估值</h4>
-                        <div class="mt-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <span>种子轮</span>
-                                <span class="font-medium">AI溢价: +39%</span>
-                            </div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span>A轮</span>
-                                <span class="font-medium">AI溢价: +24%</span>
-                            </div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span>B轮</span>
-                                <span class="font-medium">AI溢价: +41%</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>C轮</span>
-                                <span class="font-medium">AI溢价: +35%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">B轮和C轮融资数据集中AI与非AI创业公司的差距更大</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                            <div class="text-center">
-                                <p class="font-medium">轮次规模(中值)</p>
-                                <div class="stat-value trend-up">171%</div>
-                                <div class="stat-label">更高</div>
-                            </div>
-                            <div class="text-center">
-                                <p class="font-medium">融资前估值(中值)</p>
-                                <div class="stat-value trend-up">108%</div>
-                                <div class="stat-label">更大</div>
-                            </div>
-                            <div class="text-center">
-                                <p class="font-medium">增长率(中值)</p>
-                                <div class="stat-value trend-up">2.9倍</div>
-                                <div class="stat-label">更快</div>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 text-center mt-4">
-                            在种子轮和A轮阶段，我们也观察到AI和非AI创业公司之间存在相同的动态
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6">
-                <h3 class="text-xl font-semibold mb-4">当今大型创业公司可以获得私募市场前所未有的主要资本</h3>
-                <div class="overflow-x-auto">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>公司</th>
-                                <th>截至目前融资($B)</th>
-                                <th>当前ARR</th>
-                                <th>大型私募融资($B)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><i class="fas fa-building"></i> OpenAI</td>
-                                <td>63.9</td>
-                                <td>1.2B</td>
-                                <td class="trend-up">~$5B</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-database"></i> Databricks</td>
-                                <td>14.2</td>
-                                <td>1B+</td>
-                                <td class="trend-up">$5B+</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-robot"></i> Anthropic</td>
-                                <td>19.9</td>
-                                <td>500M+</td>
-                                <td class="trend-up">$3B+</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-cloud"></i> Scale AI</td>
-                                <td>12.1</td>
-                                <td>-</td>
-                                <td class="trend-up">$1.2B</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-mobile-alt"></i> Stripe</td>
-                                <td>8.8</td>
-                                <td>-</td>
-                                <td class="trend-up">$1.2B</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-comment"></i> Discord</td>
-                                <td>1.6</td>
-                                <td>-</td>
-                                <td class="trend-up">$1B+</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-plane"></i> Hopper</td>
-                                <td>1.8</td>
-                                <td>-</td>
-                                <td class="trend-up">$1.2B</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">风险投资集中在少数行业领导者</h4>
-                    <div class="chart-container border rounded p-3">
-                        <div class="text-center text-gray-500 pt-12">
-                            <p class="font-medium mb-2">最大的20笔风投交易占总投资资本的百分比</p>
-                            <div class="flex justify-center gap-4 mt-4">
-                                <div class="text-center">
-                                    <div class="stat-value">40%+</div>
-                                    <div class="stat-label">前5笔交易</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="stat-value">65%+</div>
-                                    <div class="stat-label">前20笔交易</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 退出与流动性部分 -->
-        <section id="section-exits" class="hidden fade-in">
-            <h2 class="text-2xl font-bold mb-6">退出与流动性</h2>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">近期基金的DPI较低</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-money-bill-wave text-4xl mb-3"></i>
-                        <p class="font-medium mb-2">具有DPI &gt; 0的基金百分比（按基金成立季度计算）</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                            <div>
-                                <h5 class="font-medium">3年后</h5>
-                                <ul class="text-sm space-y-1 mt-2">
-                                    <li>2017: 25%</li>
-                                    <li>2018: 19%</li>
-                                    <li>2019: 24%</li>
-                                    <li>2020: 16%</li>
-                                    <li>2021: 9%</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-medium">4年后</h5>
-                                <ul class="text-sm space-y-1 mt-2">
-                                    <li>2017: 37%</li>
-                                    <li>2018: 35%</li>
-                                    <li>2019: 35%</li>
-                                    <li>2020: 21%</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-medium">5年后</h5>
-                                <ul class="text-sm space-y-1 mt-2">
-                                    <li>2017: 59%</li>
-                                    <li>2018: 50%</li>
-                                    <li>2019: 39%</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">僵尸企业与三种不同的流动性路径</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="card p-4 bg-gray-50">
-                        <div class="text-center">
-                            <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-handshake text-blue-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-medium mb-2">并购</h4>
-                            <p class="text-sm text-gray-600">
-                                通过合并或收购实现退出
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card p-4 bg-gray-50">
-                        <div class="text-center">
-                            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-chart-line text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-medium mb-2">公开上市</h4>
-                            <p class="text-sm text-gray-600">
-                                通过IPO或SPAC上市
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card p-4 bg-gray-50">
-                        <div class="text-center">
-                            <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-exchange-alt text-yellow-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-medium mb-2">二级市场与股份回购</h4>
-                            <p class="text-sm text-gray-600">
-                                通过二级市场交易或公司回购提供流动性
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">"僵尸企业"</h4>
-                    <p class="text-gray-600 mb-4">
-                        许多独角兽企业陷入了僵尸状态，既不能进行新一轮融资，也无法实现退出
-                    </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="text-center">
-                            <div class="stat-value">616</div>
-                            <div class="stat-label">截至2021年12月的独角兽</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-up">78</div>
-                            <div class="stat-label">IPO或并购(13%)</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-up">83</div>
-                            <div class="stat-label">融资持平/上涨(11%)</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-down">14+</div>
-                            <div class="stat-label">关闭(2%+)</div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mt-4">
-                        <div class="text-center">
-                            <div class="stat-value trend-down">67</div>
-                            <div class="stat-label">融资下跌(11%)</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="stat-value trend-down">374</div>
-                            <div class="stat-label">无额外融资(61%)</div>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 text-center mt-4 font-medium">
-                        72%的2021年独角兽在过去3年内未完成上轮融资
-                    </p>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">科技IPO交易量仍在恢复</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-building text-4xl mb-3"></i>
-                        <p>按年份划分的科技IPO数量正在逐渐恢复</p>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">上市门槛仍然非常高</h4>
-                    <div class="overflow-x-auto">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>公司</th>
-                                    <th>IPO时市值</th>
-                                    <th>收入</th>
-                                    <th>收入增长</th>
-                                    <th>FCF率</th>
-                                    <th>上市以来回报</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>公司A (2023.9)</td>
-                                    <td>$5.6B</td>
-                                    <td>$807M</td>
-                                    <td>29%</td>
-                                    <td>(5%)</td>
-                                    <td class="trend-down">(6%)</td>
-                                </tr>
-                                <tr>
-                                    <td>公司B (2023.9)</td>
-                                    <td>$12.8B</td>
-                                    <td>$823M</td>
-                                    <td>32%</td>
-                                    <td>8%</td>
-                                    <td class="trend-up">14%</td>
-                                </tr>
-                                <tr>
-                                    <td>公司C (2024.4)</td>
-                                    <td>$9.9B</td>
-                                    <td>$3.0B</td>
-                                    <td>19%</td>
-                                    <td>15%</td>
-                                    <td class="trend-up">40%</td>
-                                </tr>
-                                <tr>
-                                    <td>公司D (2024.7)</td>
-                                    <td>$9.2B</td>
-                                    <td>$698M</td>
-                                    <td>48%</td>
-                                    <td>16%</td>
-                                    <td class="trend-down">(17%)</td>
-                                </tr>
-                                <tr>
-                                    <td>公司E (2024.12)</td>
-                                    <td>$4.6B</td>
-                                    <td>$478M</td>
-                                    <td>27%</td>
-                                    <td>8%</td>
-                                    <td class="trend-down">(16%)</td>
-                                </tr>
-                                <tr>
-                                    <td>公司F (2025.2)</td>
-                                    <td>$6.3B</td>
-                                    <td>$755M</td>
-                                    <td>23%</td>
-                                    <td>0%</td>
-                                    <td class="trend-down">(10%)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">一些规模化的类别领导者计划即将上市</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="card p-4">
-                        <div class="mb-2">
-                            <span class="tag">已公开申请</span>
-                        </div>
-                        <h5 class="font-medium mb-1">设计协作</h5>
-                        <div class="text-sm space-y-1">
-                            <div class="flex justify-between">
-                                <span>最新估值:</span>
-                                <span>$15B (2021)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>ARR:</span>
-                                <span>$0.6B (2023)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>增长率:</span>
-                                <span>40%+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-4">
-                        <div class="mb-2">
-                            <span class="tag">已公开申请</span>
-                        </div>
-                        <h5 class="font-medium mb-1">票务市场</h5>
-                        <div class="text-sm space-y-1">
-                            <div class="flex justify-between">
-                                <span>最新估值:</span>
-                                <span>$17B (2024)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>收入:</span>
-                                <span>$1.4B (2024.9)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>增长率:</span>
-                                <span>20%+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-4">
-                        <h5 class="font-medium mb-1">BNPL金融科技</h5>
-                        <div class="text-sm space-y-1">
-                            <div class="flex justify-between">
-                                <span>最新估值:</span>
-                                <span>$12B (2025)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>年化收入:</span>
-                                <span>~$2.5B (2024.9)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>增长率:</span>
-                                <span>20%+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-4">
-                        <h5 class="font-medium mb-1">数字银行</h5>
-                        <div class="text-sm space-y-1">
-                            <div class="flex justify-between">
-                                <span>最新估值:</span>
-                                <span>$25B (2021)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>年化收入:</span>
-                                <span>$1.5B (2024.5)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>增长率:</span>
-                                <span>~46%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">监管环境重置可能加速全球科技并购回升</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-handshake text-4xl mb-3"></i>
-                        <p>全球科技并购交易量($B)</p>
-                        <div class="mt-4">
-                            <p class="text-sm">
-                                <span class="inline-block w-3 h-3 bg-blue-500 rounded-full mr-1"></span>
-                                莉娜·汗担任FTC主席
-                            </p>
-                            <p class="text-sm">
-                                <span class="inline-block w-3 h-3 bg-green-500 rounded-full mr-1"></span>
-                                莉娜·汗卸任FTC主席
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">AI创业公司的创新并购结果</h4>
-                    <p class="text-gray-600 mb-4">
-                        对于那些筹集大量资金的AI创业公司，有些收购被描述为"许可协议"和/或人才收购
-                    </p>
-                    <div class="overflow-x-auto">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>收购方/目标</th>
-                                    <th>宣布日期</th>
-                                    <th>收购价格</th>
-                                    <th>总融资额</th>
-                                    <th>最后披露的私募估值</th>
-                                    <th>自上次融资以来时间</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>收购案例1</td>
-                                    <td>2024年3月</td>
-                                    <td>$650M</td>
-                                    <td>$1.6B</td>
-                                    <td>$4B</td>
-                                    <td>9个月</td>
-                                </tr>
-                                <tr>
-                                    <td>收购案例2</td>
-                                    <td>2024年6月</td>
-                                    <td>$330M</td>
-                                    <td>$414M</td>
-                                    <td>$1B</td>
-                                    <td>16个月</td>
-                                </tr>
-                                <tr>
-                                    <td>收购案例3</td>
-                                    <td>2024年8月</td>
-                                    <td>未披露</td>
-                                    <td>$245M</td>
-                                    <td>$625M</td>
-                                    <td>~16个月</td>
-                                </tr>
-                                <tr>
-                                    <td>收购案例4</td>
-                                    <td>2024年8月</td>
-                                    <td>$2.7B</td>
-                                    <td>$193M</td>
-                                    <td>$1B</td>
-                                    <td>~17个月</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6">
-                <h3 class="text-xl font-semibold mb-4">其他企业认为保持私有是一种战略优势，提供二级市场和股份回购</h3>
-                <div class="overflow-x-auto">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>公司</th>
-                                <th>日期</th>
-                                <th>交易金额</th>
-                                <th>估值</th>
-                                <th>业务规模</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>公司1</td>
-                                <td>2025年2月</td>
-                                <td>$300M</td>
-                                <td>$12B</td>
-                                <td>$800M+ ARR</td>
-                            </tr>
-                            <tr>
-                                <td>公司2</td>
-                                <td>2024年12月</td>
-                                <td>$1,250M</td>
-                                <td>$350B</td>
-                                <td>$10B+ 收入</td>
-                            </tr>
-                            <tr>
-                                <td>公司3</td>
-                                <td>2024年9月</td>
-                                <td>$861M</td>
-                                <td>$70B</td>
-                                <td>$4B+ 净收入</td>
-                            </tr>
-                            <tr>
-                                <td>公司4</td>
-                                <td>2024年8月</td>
-                                <td>$500M</td>
-                                <td>$45B</td>
-                                <td>$2B+ 收入</td>
-                            </tr>
-                            <tr>
-                                <td>公司5</td>
-                                <td>2024年5月</td>
-                                <td>$416M</td>
-                                <td>$12.5B</td>
-                                <td>$600M+ ARR</td>
-                            </tr>
-                            <tr>
-                                <td>公司6</td>
-                                <td>2024年4月</td>
-                                <td>$694M</td>
-                                <td>$65B</td>
-                                <td>~$4B 净收入</td>
-                            </tr>
-                            <tr>
-                                <td>公司7</td>
-                                <td>2024年4月</td>
-                                <td>$1,600M</td>
-                                <td>$26B+</td>
-                                <td>$2B+ ARR</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI机遇部分 -->
-        <section id="section-ai" class="hidden fade-in">
-            <h2 class="text-2xl font-bold mb-6">AI - 代际性机遇</h2>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">这是共识：这是下一个大事件</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <div class="quote">
-                            "人工智能是自图形用户界面以来最重要的技术进步"
-                            <div class="text-sm text-gray-500 mt-1">- 比尔·盖茨</div>
-                        </div>
-                        <div class="quote mt-4">
-                            "人工智能和生成式AI可能是我们任何人一生中最重要的技术"
-                            <div class="text-sm text-gray-500 mt-1">- 马克·贝尼奥夫</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="quote">
-                            "在我看来，这是自电力以来最重要的革命"
-                            <div class="text-sm text-gray-500 mt-1">- 埃里克·施密特</div>
-                        </div>
-                        <div class="quote mt-4">
-                            "AI可以用来改进一切。它将在一切中"
-                            <div class="text-sm text-gray-500 mt-1">- 杰夫·贝索斯</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">像互联网和云一样，AI是下一个平台转变</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-chart-line text-4xl mb-3"></i>
-                        <p>年度收入增长指数</p>
-                        <div class="flex justify-center gap-6 mt-4">
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+1,831%</div>
-                                <div class="stat-label">思科</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+1,049%</div>
-                                <div class="stat-label">AWS</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+1,736%</div>
-                                <div class="stat-label">英伟达</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">平台转变的三个阶段</h4>
-                    <div class="flex items-center">
-                        <div class="w-1/3 text-center">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-2">
-                                <span class="text-blue-600 font-bold">1</span>
-                            </div>
-                            <div class="font-medium">初始爬升</div>
-                        </div>
-                        <div class="w-1/3 text-center">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-2">
-                                <span class="text-blue-600 font-bold">2</span>
-                            </div>
-                            <div class="font-medium">轻微回调</div>
-                        </div>
-                        <div class="w-1/3 text-center">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-2">
-                                <span class="text-blue-600 font-bold">3</span>
-                            </div>
-                            <div class="font-medium">加速</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">超大规模企业正在大力投资AI基础设施</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-server text-4xl mb-3"></i>
-                        <p>年度资本支出($B)</p>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+41%</div>
-                                <div class="stat-label">CAGR</div>
-                                <div class="text-xs">公司A</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+40%</div>
-                                <div class="stat-label">CAGR</div>
-                                <div class="text-xs">公司B</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+39%</div>
-                                <div class="stat-label">CAGR</div>
-                                <div class="text-xs">公司C</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+36%</div>
-                                <div class="stat-label">CAGR</div>
-                                <div class="text-xs">公司D</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">+20%</div>
-                                <div class="stat-label">CAGR</div>
-                                <div class="text-xs">公司E</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">AI预算正在被解锁</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <p class="font-medium mb-4">问题："未来1年/3年内IT预算中可能分配给生成式AI的百分比是多少？"</p>
-                        <div class="flex justify-center gap-20 mt-4">
-                            <div class="text-center">
-                                <div class="stat-value">7%</div>
-                                <div class="stat-label">当前分配</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-value trend-up">21%</div>
-                                <div class="stat-label">3年后预期</div>
-                            </div>
-                        </div>
-                        <p class="mt-4 text-sm">预计未来3年内生成式AI预算分配将增加3倍</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">AI机会是巨大的</h3>
-                <div class="p-4 bg-blue-50 rounded mb-4">
-                    <p class="text-center text-gray-700">
-                        摩根士丹利研究预计，到2028年，全球生成式AI企业软件支出将增加到4010亿美元，
-                        占全球软件支出总额的约22%。
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="text-center">
-                        <div class="stat-value trend-up">124%</div>
-                        <div class="stat-label">CAGR '24-'28</div>
-                        <div class="text-sm mt-2">生成式AI</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="stat-value">14%</div>
-                        <div class="stat-label">CAGR '24-'28</div>
-                        <div class="text-sm mt-2">软件即服务</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="stat-value">7%</div>
-                        <div class="stat-label">CAGR '24-'28</div>
-                        <div class="text-sm mt-2">非AI软件</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">AI将从根本上改变我们的工作方式</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="card p-4 bg-blue-50">
-                        <h4 class="text-lg font-medium mb-3 text-center">软件即服务</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-blue-600 text-sm"></i>
-                                </span>
-                                <span>基于席位和使用量的定价</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-blue-600 text-sm"></i>
-                                </span>
-                                <span>毛利率超过90%</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-blue-600 text-sm"></i>
-                                </span>
-                                <span>两位数效率提升</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-blue-600 text-sm"></i>
-                                </span>
-                                <span>创造了数万亿软件价值</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card p-4 bg-green-50">
-                        <h4 class="text-lg font-medium mb-3 text-center">服务即软件</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-green-600 text-sm"></i>
-                                </span>
-                                <span>AI代理自动化</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-green-600 text-sm"></i>
-                                </span>
-                                <span>基于结果的定价，按"服务"收费</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-green-600 text-sm"></i>
-                                </span>
-                                <span>毛利率较低，机会更大</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-green-600 text-sm"></i>
-                                </span>
-                                <span>10倍以上效率提升</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-check text-green-600 text-sm"></i>
-                                </span>
-                                <span>扩展软件市场，解决服务市场</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="p-4 bg-gray-50 rounded mt-6">
-                    <p class="text-center text-gray-700">
-                        麦肯锡估计，全球在知识工作者薪资上的支出约为5万亿美元，他们认为
-                        这可能会为知识工作自动化创造1万亿美元的市场。
-                    </p>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">案例研究：客户服务中的现有企业与初创公司</h3>
-                <div class="quote mb-6">
-                    "每个初创公司和现有企业之间的战斗归结为初创公司是否能在现有企业获得创新之前获得分销"
-                    <div class="text-sm text-gray-500 mt-1">- Alex Rampell</div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">现有企业</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-briefcase text-blue-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">商业模式</span>
-                                    <p class="text-sm text-gray-600">基于席位的模式正被颠覆</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-users text-blue-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">分销</span>
-                                    <p class="text-sm text-gray-600">建立的客户关系和信任</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-database text-blue-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">数据访问</span>
-                                    <p class="text-sm text-gray-600">多年积累的专有客户数据</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-sitemap text-blue-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">架构</span>
-                                    <p class="text-sm text-gray-600">传统ML数据管道和模型基础设施</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-rocket text-blue-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">产品速度</span>
-                                    <p class="text-sm text-gray-600">大型复杂公司，优先事项相互竞争</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-medium mb-3">初创公司</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-briefcase text-green-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">商业模式</span>
-                                    <p class="text-sm text-gray-600">基于代理技术驱动的结果模式</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-users text-green-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">分销</span>
-                                    <p class="text-sm text-gray-600">扩展新GTM动作的"冷启动"问题</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-database text-green-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">数据访问</span>
-                                    <p class="text-sm text-gray-600">独特的数据合作伙伴关系或合成数据创建</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-sitemap text-green-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">架构</span>
-                                    <p class="text-sm text-gray-600">灵活测试和优化AI开发堆栈</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-1">
-                                    <i class="fas fa-rocket text-green-600 text-xs"></i>
-                                </span>
-                                <div>
-                                    <span class="font-medium">产品速度</span>
-                                    <p class="text-sm text-gray-600">小型、使命驱动的团队行动非常迅速</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6 mb-6">
-                <h3 class="text-xl font-semibold mb-4">案例研究：公共市场奖励AI执行</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="card p-4 bg-green-50">
-                        <h4 class="text-lg font-medium mb-3 text-center">执行良好的AI公司</h4>
-                        <div class="quote mb-4">
-                            "我们认为该公司是真正的AI受益者，因为其AI引擎为广告平台创建了高效的飞轮"
-                            <div class="text-sm text-gray-500 mt-1">- 摩根大通研究</div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span>2023年3月市值</span>
-                                <span class="font-medium">$5.1B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>当前市值</span>
-                                <span class="font-medium trend-up">$80.9B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入倍数</span>
-                                <span class="font-medium trend-up">14.4倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>过去12个月股价回报</span>
-                                <span class="font-medium trend-up">+297%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入</span>
-                                <span class="font-medium">$5.8B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入增长</span>
-                                <span class="font-medium">23%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月FCF率</span>
-                                <span class="font-medium">50%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-4 bg-gray-50">
-                        <h4 class="text-lg font-medium mb-3 text-center">AI执行遇挑战的公司</h4>
-                        <div class="quote mb-4">
-                            "该公司不断迭代Kokai，考虑到新平台带来的复杂程度，因此决定比预期更慢地推出Kokai，以便为每个客户优化性能"
-                            <div class="text-sm text-gray-500 mt-1">- Truist Securities</div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span>2023年3月市值</span>
-                                <span class="font-medium">$28.3B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>当前市值</span>
-                                <span class="font-medium trend-down">$29.9B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入倍数</span>
-                                <span class="font-medium trend-down">9.8倍</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>过去12个月股价回报</span>
-                                <span class="font-medium trend-down">(26%)</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入</span>
-                                <span class="font-medium">$2.9B</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月收入增长</span>
-                                <span class="font-medium">18%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>未来12个月FCF率</span>
-                                <span class="font-medium">26%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card p-6">
-                <h3 class="text-xl font-semibold mb-4">AI将模仿哪种平台转变尚不清楚</h3>
-                <div class="chart-container border rounded p-3">
-                    <div class="text-center text-gray-500 pt-12">
-                        <i class="fas fa-question-circle text-4xl mb-3"></i>
-                        <p>年度收入增长指数</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                            <div>
-                                <h5 class="font-medium">思科</h5>
-                                <div class="text-sm space-y-1 mt-2">
-                                    <div class="flex justify-between items-center">
-                                        <span>2年增长</span>
-                                        <span>+1,831%</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span>4年增长</span>
-                                        <span>+1,448%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="font-medium">AWS</h5>
-                                <div class="text-sm space-y-1 mt-2">
-                                    <div class="flex justify-between items-center">
-                                        <span>2年增长</span>
-                                        <span>+1,049%</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span>4年增长</span>
-                                        <span>+2,205%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="font-medium">英伟达</h5>
-                                <div class="text-sm space-y-1 mt-2">
-                                    <div class="flex justify-between items-center">
-                                        <span>2年增长</span>
-                                        <span>+1,736%</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span>4年增长</span>
-                                        <span>??</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="text-lg font-medium mb-3">各个技术时代的标志性公司成立时间</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <h5 class="font-medium text-center mb-2">互联网时代</h5>
-                            <ul class="text-sm space-y-2">
-                                <li class="flex justify-between items-center">
-                                    <span>1993-1995</span>
-                                    <span>多家公司成立</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>1998</span>
-                                    <span>Google成立</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>1999</span>
-                                    <span>Salesforce成立</span>
-                                </li>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-2 text-secondary">关键发现</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><i class="fas fa-check text-green-600 mr-2"></i>公司优先考虑盈利能力，牺牲增长</li>
+                                <li><i class="fas fa-check text-green-600 mr-2"></i>软件公司越来越多地达成预期</li>
+                                <li><i class="fas fa-check text-green-600 mr-2"></i>顶级SaaS公司与其他SaaS公司之间的估值差距扩大</li>
                             </ul>
                         </div>
-                        <div>
-                            <h5 class="font-medium text-center mb-2">移动时代</h5>
-                            <ul class="text-sm space-y-2">
-                                <li class="flex justify-between items-center">
-                                    <span>2007</span>
-                                    <span>iPhone发布</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>2009</span>
-                                    <span>Uber成立</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>2010</span>
-                                    <span>Instagram成立</span>
-                                </li>
-                            </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">市场领导者持续获得不成比例的收益</h3>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">中位数NTM收入倍数</h4>
+                                <div class="chart-container h-40">
+                                    <canvas id="ntmRevenueChart"></canvas>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">中位数市值 ($B)</h4>
+                                <div class="chart-container h-40">
+                                    <canvas id="marketCapChart"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h5 class="font-medium text-center mb-2">云时代</h5>
-                            <ul class="text-sm space-y-2">
-                                <li class="flex justify-between items-center">
-                                    <span>2006</span>
-                                    <span>AWS发布</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>2008</span>
-                                    <span>Airbnb成立</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>2009</span>
-                                    <span>Slack成立</span>
-                                </li>
-                            </ul>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">中位数NTM收入增长</h4>
+                                <div class="chart-container h-40">
+                                    <canvas id="revenueGrowthChart"></canvas>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">中位数NTM FCF利润率</h4>
+                                <div class="chart-container h-40">
+                                    <canvas id="fcfMarginChart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 结论部分 -->
-        <section id="section-conclusions" class="hidden fade-in">
-            <h2 class="text-2xl font-bold mb-6">结论</h2>
-            <div class="card p-6 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <div class="flex items-start mb-4">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-chart-line text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium mb-2">公共市场继续攀升</h3>
-                                <p class="text-gray-600">
-                                    由于更强劲的基本面，顶级公司与其他公司的差距不断扩大
-                                </p>
-                            </div>
+        <!-- Private Markets Section -->
+        <section id="private-markets" class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-secondary border-b pb-2">私募市场</h2>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">历史重演：市场在峰值后约2年触底</h3>
+                        <div class="chart-container">
+                            <canvas id="ventureInvestmentChart"></canvas>
                         </div>
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-rocket text-green-600"></i>
+                        <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">10季度</p>
+                                <p class="text-sm text-gray-700">互联网泡沫</p>
                             </div>
-                            <div>
-                                <h3 class="text-lg font-medium mb-2">风险投资市场已经回暖</h3>
-                                <p class="text-gray-600">
-                                    但总体投资仍然集中，AI公司增长最快，估值最高
-                                </p>
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">9季度</p>
+                                <p class="text-sm text-gray-700">金融危机</p>
+                            </div>
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">8季度</p>
+                                <p class="text-sm text-gray-700">反弹</p>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="flex items-start mb-4">
-                            <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-door-open text-yellow-600"></i>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">软件销售环境也在改善</h3>
+                        <p class="mb-4 text-gray-700">软件销售代表按季度达成配额情况</p>
+                        <div class="chart-container">
+                            <canvas id="quotaAttainmentChart"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">A轮（&gt;$10M）交易数量</h4>
+                                <p class="text-gray-700">A轮活动已稳定在低于疫情前水平</p>
                             </div>
                             <div>
-                                <h3 class="text-lg font-medium mb-2">私募领导者有流动性选择</h3>
-                                <p class="text-gray-600">
-                                    但有越来越多高估值的初创公司，它们的最终结果仍不明确
-                                </p>
+                                <h4 class="font-medium mb-2 text-secondary">B轮（&gt;$20M）+ C轮（&gt;$30M）交易数量</h4>
+                                <p class="text-gray-700">B轮和C轮活动已开始反弹</p>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-robot text-purple-600"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">私募市场估值仍高于历史标准，尤其是与公共市场相比</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-3 text-left">年份</th>
+                                        <th class="py-2 px-3 text-center">2017</th>
+                                        <th class="py-2 px-3 text-center">2018</th>
+                                        <th class="py-2 px-3 text-center">2019</th>
+                                        <th class="py-2 px-3 text-center">2020</th>
+                                        <th class="py-2 px-3 text-center">2021</th>
+                                        <th class="py-2 px-3 text-center">2022</th>
+                                        <th class="py-2 px-3 text-center">2023</th>
+                                        <th class="py-2 px-3 text-center">2024</th>
+                                        <th class="py-2 px-3 text-center">2025(YTD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-3 border-t">公共高增长软件LTM收入倍数</td>
+                                        <td class="py-2 px-3 border-t text-center">10.6x</td>
+                                        <td class="py-2 px-3 border-t text-center">13.9x</td>
+                                        <td class="py-2 px-3 border-t text-center">15.2x</td>
+                                        <td class="py-2 px-3 border-t text-center">20.9x</td>
+                                        <td class="py-2 px-3 border-t text-center">25.8x</td>
+                                        <td class="py-2 px-3 border-t text-center">14.0x</td>
+                                        <td class="py-2 px-3 border-t text-center">12.5x</td>
+                                        <td class="py-2 px-3 border-t text-center">11.3x</td>
+                                        <td class="py-2 px-3 border-t text-center">15.5x</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="py-2 px-3 border-t">B轮和C轮软件ARR倍数</td>
+                                        <td class="py-2 px-3 border-t text-center">20.2x</td>
+                                        <td class="py-2 px-3 border-t text-center">21.9x</td>
+                                        <td class="py-2 px-3 border-t text-center">31.3x</td>
+                                        <td class="py-2 px-3 border-t text-center">39.7x</td>
+                                        <td class="py-2 px-3 border-t text-center">105.4x</td>
+                                        <td class="py-2 px-3 border-t text-center">85.0x</td>
+                                        <td class="py-2 px-3 border-t text-center">63.5x</td>
+                                        <td class="py-2 px-3 border-t text-center">49.3x</td>
+                                        <td class="py-2 px-3 border-t text-center">48.2x</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 border-t font-medium">相对于公共市场的溢价</td>
+                                        <td class="py-2 px-3 border-t text-center">1.91x</td>
+                                        <td class="py-2 px-3 border-t text-center">1.58x</td>
+                                        <td class="py-2 px-3 border-t text-center">2.06x</td>
+                                        <td class="py-2 px-3 border-t text-center">1.90x</td>
+                                        <td class="py-2 px-3 border-t text-center">4.09x</td>
+                                        <td class="py-2 px-3 border-t text-center">6.07x</td>
+                                        <td class="py-2 px-3 border-t text-center">5.08x</td>
+                                        <td class="py-2 px-3 border-t text-center">4.38x</td>
+                                        <td class="py-2 px-3 border-t text-center">3.12x</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">AI交易变得更加普遍</h3>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="font-medium mb-2 text-secondary">相关交易中涉及AI初创公司的比例</h4>
+                                <div class="chart-container h-48">
+                                    <canvas id="aiDealsChart"></canvas>
+                                </div>
                             </div>
                             <div>
-                                <h3 class="text-lg font-medium mb-2">AI机会仍处于早期阶段</h3>
-                                <p class="text-gray-600">
-                                    领先企业正在快速投资。潜在价值可能达到数万亿美元。
-                                </p>
+                                <h4 class="font-medium mb-2 text-secondary">YC中AI公司的比例</h4>
+                                <div class="chart-container h-48">
+                                    <canvas id="ycAIChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3 text-secondary">原生AI应用增长速度比以往任何时候都快</h4>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div class="bg-green-100 rounded-lg p-4">
+                                    <p class="font-bold text-2xl text-green-700">24个月</p>
+                                    <p class="text-gray-700">AI初创公司达到500万美元年化收入的时间</p>
+                                </div>
+                                <div class="bg-blue-100 rounded-lg p-4">
+                                    <p class="font-bold text-2xl text-blue-700">37个月</p>
+                                    <p class="text-gray-700">SaaS初创公司达到500万美元年化收入的时间</p>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-gray-700 font-medium">AI初创公司比SaaS初创公司更快实现500万美元年化收入，约提前1年。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Liquidity Section -->
+        <section id="liquidity" class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-secondary border-b pb-2">流动性与退出</h2>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">近期创投基金的DPI较少</h3>
+                        <p class="mb-4 text-gray-700">基金成立以来按季度计算的DPI&gt;0的基金百分比（2017-2022年份）</p>
+                        <div class="chart-container h-64">
+                            <canvas id="dpiChart"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-3 gap-4">
+                            <div class="bg-gray-100 rounded-lg p-3">
+                                <p class="font-medium text-gray-700">三年时点</p>
+                                <div class="mt-2 space-y-1">
+                                    <p class="text-sm text-gray-600">2017: <span class="font-bold">25%</span></p>
+                                    <p class="text-sm text-gray-600">2018: <span class="font-bold">19%</span></p>
+                                    <p class="text-sm text-gray-600">2019: <span class="font-bold">24%</span></p>
+                                    <p class="text-sm text-gray-600">2020: <span class="font-bold">16%</span></p>
+                                    <p class="text-sm text-gray-600">2021: <span class="font-bold">9%</span></p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3">
+                                <p class="font-medium text-gray-700">四年时点</p>
+                                <div class="mt-2 space-y-1">
+                                    <p class="text-sm text-gray-600">2017: <span class="font-bold">37%</span></p>
+                                    <p class="text-sm text-gray-600">2018: <span class="font-bold">35%</span></p>
+                                    <p class="text-sm text-gray-600">2019: <span class="font-bold">35%</span></p>
+                                    <p class="text-sm text-gray-600">2020: <span class="font-bold">21%</span></p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3">
+                                <p class="font-medium text-gray-700">五年时点</p>
+                                <div class="mt-2 space-y-1">
+                                    <p class="text-sm text-gray-600">2017: <span class="font-bold">59%</span></p>
+                                    <p class="text-sm text-gray-600">2018: <span class="font-bold">50%</span></p>
+                                    <p class="text-sm text-gray-600">2019: <span class="font-bold">39%</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">僵尸企业和三条不同的流动性路径</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="card bg-blue-50 rounded-lg p-5 text-center">
+                                <div class="h-12 w-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-exchange-alt text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-medium text-blue-700 mb-2">二级市场与股份回购</h4>
+                                <p class="text-sm text-gray-700">为现有投资者提供部分流动性而不完全退出</p>
+                            </div>
+                            <div class="card bg-green-50 rounded-lg p-5 text-center">
+                                <div class="h-12 w-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-chart-line text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-medium text-green-700 mb-2">上市</h4>
+                                <p class="text-sm text-gray-700">通过IPO在公开市场交易股票</p>
+                            </div>
+                            <div class="card bg-red-50 rounded-lg p-5 text-center">
+                                <div class="h-12 w-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-handshake text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-medium text-red-700 mb-2">并购</h4>
+                                <p class="text-sm text-gray-700">被其他公司收购实现完全退出</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 bg-yellow-50 rounded-lg p-5">
+                            <h4 class="font-medium text-yellow-700 mb-2 flex items-center">
+                                <i class="fas fa-skull text-yellow-700 mr-2"></i>
+                                "僵尸企业"困境
+                            </h4>
+                            <p class="text-gray-700">许多独角兽被困在僵尸企业状态：</p>
+                            <div class="mt-3 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                                <div class="bg-white rounded p-2">
+                                    <p class="font-bold text-gray-800">13%</p>
+                                    <p class="text-xs text-gray-600">已退出</p>
+                                </div>
+                                <div class="bg-white rounded p-2">
+                                    <p class="font-bold text-gray-800">2%+</p>
+                                    <p class="text-xs text-gray-600">关闭</p>
+                                </div>
+                                <div class="bg-white rounded p-2">
+                                    <p class="font-bold text-gray-800">61%</p>
+                                    <p class="text-xs text-gray-600">无额外主要轮次</p>
+                                </div>
+                                <div class="bg-white rounded p-2">
+                                    <p class="font-bold text-gray-800">11%</p>
+                                    <p class="text-xs text-gray-600">下调估值轮次</p>
+                                </div>
+                                <div class="bg-white rounded p-2">
+                                    <p class="font-bold text-gray-800">13%</p>
+                                    <p class="text-xs text-gray-600">估值持平/上调轮次</p>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-gray-700 font-medium">72%的2021年独角兽企业在过去3年中没有筹集到上轮融资。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">科技IPO数量仍在恢复</h3>
+                        <div class="chart-container">
+                            <canvas id="techIPOChart"></canvas>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3 text-secondary">上市门槛仍然非常高</h4>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-sm">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="py-2 px-2 text-left">指标</th>
+                                            <th class="py-2 px-2 text-center">公司A</th>
+                                            <th class="py-2 px-2 text-center">公司B</th>
+                                            <th class="py-2 px-2 text-center">公司C</th>
+                                            <th class="py-2 px-2 text-center">公司D</th>
+                                            <th class="py-2 px-2 text-center">公司E</th>
+                                            <th class="py-2 px-2 text-center">公司F</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-2 border-t">IPO市值</td>
+                                            <td class="py-2 px-2 border-t text-center">$9.9B</td>
+                                            <td class="py-2 px-2 border-t text-center">$9.2B</td>
+                                            <td class="py-2 px-2 border-t text-center">$5.6B</td>
+                                            <td class="py-2 px-2 border-t text-center">$4.6B</td>
+                                            <td class="py-2 px-2 border-t text-center">$6.3B</td>
+                                            <td class="py-2 px-2 border-t text-center">$12.8B</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="py-2 px-2 border-t">收入</td>
+                                            <td class="py-2 px-2 border-t text-center">$3.0B</td>
+                                            <td class="py-2 px-2 border-t text-center">$698M</td>
+                                            <td class="py-2 px-2 border-t text-center">$807M</td>
+                                            <td class="py-2 px-2 border-t text-center">$478M</td>
+                                            <td class="py-2 px-2 border-t text-center">$755M</td>
+                                            <td class="py-2 px-2 border-t text-center">$823M</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-2 border-t">收入增长</td>
+                                            <td class="py-2 px-2 border-t text-center">19%</td>
+                                            <td class="py-2 px-2 border-t text-center">48%</td>
+                                            <td class="py-2 px-2 border-t text-center">29%</td>
+                                            <td class="py-2 px-2 border-t text-center">27%</td>
+                                            <td class="py-2 px-2 border-t text-center">23%</td>
+                                            <td class="py-2 px-2 border-t text-center">32%</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="py-2 px-2 border-t">FCF利润率</td>
+                                            <td class="py-2 px-2 border-t text-center">15%</td>
+                                            <td class="py-2 px-2 border-t text-center">16%</td>
+                                            <td class="py-2 px-2 border-t text-center">(5%)</td>
+                                            <td class="py-2 px-2 border-t text-center">8%</td>
+                                            <td class="py-2 px-2 border-t text-center">0%</td>
+                                            <td class="py-2 px-2 border-t text-center">8%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">创业公司的退出路径</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="font-medium mb-3 text-secondary">一些规模化的类别领导者计划即将上市</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded">
+                                        <span class="text-gray-700">数字医疗</span>
+                                        <span class="font-medium">估值：$6B</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded">
+                                        <span class="text-gray-700">社交消息</span>
+                                        <span class="font-medium">估值：$15B</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded">
+                                        <span class="text-gray-700">GPU云计算</span>
+                                        <span class="font-medium">估值：$23B</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded">
+                                        <span class="text-gray-700">客户体验</span>
+                                        <span class="font-medium">估值：$21B</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-3 text-secondary">监管环境的重置可能加速全球科技并购的反弹</h4>
+                                <div class="chart-container h-48">
+                                    <canvas id="techMAChart"></canvas>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <span class="text-xs text-gray-500">Lina Khan卸任FTC主席后，预计科技并购将增加</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3 text-secondary">其他公司认为保持私有是战略优势，并提供二级市场和股份回购</h4>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-sm">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="py-2 px-3 text-left">日期</th>
+                                            <th class="py-2 px-3 text-left">交易金额</th>
+                                            <th class="py-2 px-3 text-left">估值</th>
+                                            <th class="py-2 px-3 text-left">规模</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-3 border-t">2025年2月</td>
+                                            <td class="py-2 px-3 border-t">$300M</td>
+                                            <td class="py-2 px-3 border-t">$12B</td>
+                                            <td class="py-2 px-3 border-t">$800M+ ARR</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="py-2 px-3 border-t">2024年12月</td>
+                                            <td class="py-2 px-3 border-t">$1,250M</td>
+                                            <td class="py-2 px-3 border-t">$350B</td>
+                                            <td class="py-2 px-3 border-t">$10B+ 收入</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-t">2024年9月</td>
+                                            <td class="py-2 px-3 border-t">$861M</td>
+                                            <td class="py-2 px-3 border-t">$70B</td>
+                                            <td class="py-2 px-3 border-t">$4B+ 净收入</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="py-2 px-3 border-t">2024年8月</td>
+                                            <td class="py-2 px-3 border-t">$500M</td>
+                                            <td class="py-2 px-3 border-t">$45B</td>
+                                            <td class="py-2 px-3 border-t">$2B+ 收入</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AI Opportunity Section -->
+        <section id="ai-opportunity" class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-secondary border-b pb-2">AI：世代性机遇</h2>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">业界共识：这是下一个重大技术</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <blockquote class="italic text-gray-700">
+                                    "人工智能是自图形用户界面以来最重要的技术进步"
+                                    <footer class="mt-2 text-sm">— Bill Gates</footer>
+                                </blockquote>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <blockquote class="italic text-gray-700">
+                                    "在我看来，这是自电力以来最重要的革命"
+                                    <footer class="mt-2 text-sm">— Eric Schmidt</footer>
+                                </blockquote>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <blockquote class="italic text-gray-700">
+                                    "人工智能和生成式AI可能是任何时代最重要的技术"
+                                    <footer class="mt-2 text-sm">— Marc Benioff</footer>
+                                </blockquote>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <blockquote class="italic text-gray-700">
+                                    "AI可以用来改进一切。它将无处不在"
+                                    <footer class="mt-2 text-sm">— Jeff Bezos</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">像互联网和云一样，AI是下一个平台转变</h3>
+                        <div class="chart-container h-80">
+                            <canvas id="platformShiftChart"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">+1,831%</p>
+                                <p class="text-sm text-gray-700">思科：1994-2000</p>
+                            </div>
+                            <div class="bg-green-100 rounded-lg p-3">
+                                <p class="font-bold text-green-700">+1,049%</p>
+                                <p class="text-sm text-gray-700">AWS：2013-2019</p>
+                            </div>
+                            <div class="bg-purple-100 rounded-lg p-3">
+                                <p class="font-bold text-purple-700">+1,736%</p>
+                                <p class="text-sm text-gray-700">NVIDIA：2019-2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">超大规模公司正在大力投资AI基础设施</h3>
+                        <div class="chart-container">
+                            <canvas id="capexChart"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                            <div class="bg-green-100 rounded-lg p-3">
+                                <p class="font-bold text-green-700">+41%</p>
+                                <p class="text-xs text-gray-700">CAGR</p>
+                            </div>
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">+40%</p>
+                                <p class="text-xs text-gray-700">CAGR</p>
+                            </div>
+                            <div class="bg-red-100 rounded-lg p-3">
+                                <p class="font-bold text-red-700">+39%</p>
+                                <p class="text-xs text-gray-700">CAGR</p>
+                            </div>
+                            <div class="bg-purple-100 rounded-lg p-3">
+                                <p class="font-bold text-purple-700">+36%</p>
+                                <p class="text-xs text-gray-700">CAGR</p>
+                            </div>
+                            <div class="bg-yellow-100 rounded-lg p-3">
+                                <p class="font-bold text-yellow-700">+20%</p>
+                                <p class="text-xs text-gray-700">CAGR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">AI预算才刚刚开始释放</h3>
+                        <p class="mb-4 text-gray-700">问题："未来1年/3年可能分配给生成式AI的IT预算百分比是多少？"</p>
+                        <div class="chart-container">
+                            <canvas id="aiBudgetChart"></canvas>
+                        </div>
+                        <p class="mt-4 text-center font-medium text-gray-700">预计未来3年生成式AI预算分配将增长3倍</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">AI机会是巨大的</h3>
+                        <p class="mb-4 text-gray-700">摩根士丹利研究估计，到2028年，全球生成式AI企业软件支出将增加到4010亿美元，占全球软件支出总额的约22%。</p>
+                        <div class="chart-container">
+                            <canvas id="aiMarketChart"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-blue-100 rounded-lg p-3">
+                                <p class="font-bold text-blue-700">14%</p>
+                                <p class="text-xs text-gray-700">CAGR '24-'28</p>
+                            </div>
+                            <div class="bg-green-100 rounded-lg p-3">
+                                <p class="font-bold text-green-700">124%</p>
+                                <p class="text-xs text-gray-700">AI CAGR '24-'28</p>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3">
+                                <p class="font-bold text-gray-700">7%</p>
+                                <p class="text-xs text-gray-700">其他CAGR '24-'28</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-secondary-light">AI将从根本上改变我们的工作方式</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 rounded-lg p-5">
+                                <h4 class="font-medium text-blue-700 mb-3">软件即服务 (SaaS)</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><i class="fas fa-check text-blue-600 mr-2"></i>基于席位和使用量的定价</li>
+                                    <li><i class="fas fa-check text-blue-600 mr-2"></i>毛利率超过90%</li>
+                                    <li><i class="fas fa-check text-blue-600 mr-2"></i>两位数效率提升</li>
+                                    <li><i class="fas fa-check text-blue-600 mr-2"></i>创造数万亿软件价值</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 rounded-lg p-5">
+                                <h4 class="font-medium text-green-700 mb-3">服务即软件 (AI代理自动化)</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><i class="fas fa-check text-green-600 mr-2"></i>基于结果的定价，按"服务"收费</li>
+                                    <li><i class="fas fa-check text-green-600 mr-2"></i>较低的毛利率，更大的机会</li>
+                                    <li><i class="fas fa-check text-green-600 mr-2"></i>10倍以上效率提升</li>
+                                    <li><i class="fas fa-check text-green-600 mr-2"></i>扩展软件市场并解决服务市场</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-700">麦肯锡估计，全球知识工作者薪资支出约为5万亿美元，他们认为这可能为知识工作自动化创造1万亿美元的潜在市场。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Conclusions Section -->
+        <section id="conclusions" class="mb-16 section-animate">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-secondary border-b pb-2">结论</h2>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="card bg-light rounded-lg p-6">
+                                <h3 class="text-xl font-semibold mb-4 text-secondary">公共市场</h3>
+                                <p class="text-gray-700 mb-4">公共市场继续走高，但顶级公司由于更强的基本面，已经与其他公司拉开差距。</p>
+                                <div class="mt-auto">
+                                    <div class="inline-block bg-secondary text-white rounded-full px-3 py-1 text-sm">估值差异</div>
+                                    <div class="inline-block bg-secondary-light text-white rounded-full px-3 py-1 text-sm ml-2">两极分化</div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-light rounded-lg p-6">
+                                <h3 class="text-xl font-semibold mb-4 text-secondary">私募市场</h3>
+                                <p class="text-gray-700 mb-4">风投市场已经反弹，但整体投资仍然集中，AI公司增长最快并获得最高估值。</p>
+                                <div class="mt-auto">
+                                    <div class="inline-block bg-primary text-white rounded-full px-3 py-1 text-sm">AI热潮</div>
+                                    <div class="inline-block bg-primary-light text-primary rounded-full px-3 py-1 text-sm ml-2">高估值</div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-light rounded-lg p-6">
+                                <h3 class="text-xl font-semibold mb-4 text-secondary">流动性与退出</h3>
+                                <p class="text-gray-700 mb-4">私募市场领导者有流动性选择，但越来越多高估值初创公司的最终结果仍不明确。</p>
+                                <div class="mt-auto">
+                                    <div class="inline-block bg-secondary-light text-white rounded-full px-3 py-1 text-sm">二级市场</div>
+                                    <div class="inline-block bg-yellow-600 text-white rounded-full px-3 py-1 text-sm ml-2">僵尸企业</div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-light rounded-lg p-6">
+                                <h3 class="text-xl font-semibold mb-4 text-secondary">AI机遇</h3>
+                                <p class="text-gray-700 mb-4">AI机遇仍处于早期阶段，领先公司正快速投资。潜在机会可能达到数万亿股权价值。</p>
+                                <div class="mt-auto">
+                                    <div class="inline-block bg-green-600 text-white rounded-full px-3 py-1 text-sm">平台转变</div>
+                                    <div class="inline-block bg-blue-600 text-white rounded-full px-3 py-1 text-sm ml-2">万亿市场</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1889,55 +896,642 @@
         </section>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <h3 class="text-xl font-bold">红点创投市场报告</h3>
+                        <p class="text-gray-300 mt-2">2025年市场概览与趋势分析</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-300 text-sm">©2025 红点创投</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Toggle mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Animation on scroll
         document.addEventListener('DOMContentLoaded', function() {
-            // 获取所有标签和内容部分
-            const tabs = {
-                'tab-overview': 'section-overview',
-                'tab-public': 'section-public',
-                'tab-private': 'section-private',
-                'tab-exits': 'section-exits',
-                'tab-ai': 'section-ai'
-            };
+            const sections = document.querySelectorAll('.section-animate');
             
-            // 为每个标签添加点击事件
-            for (const [tabId, sectionId] of Object.entries(tabs)) {
-                const tabElement = document.getElementById(tabId);
-                const sectionElement = document.getElementById(sectionId);
-                
-                tabElement.addEventListener('click', function() {
-                    // 隐藏所有内容部分
-                    for (const id of Object.values(tabs)) {
-                        document.getElementById(id).classList.add('hidden');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
                     }
-                    
-                    // 移除所有标签的active类
-                    for (const id of Object.keys(tabs)) {
-                        document.getElementById(id).classList.remove('active');
-                    }
-                    
-                    // 显示选中的内容部分并添加active类到选中的标签
-                    sectionElement.classList.remove('hidden');
-                    this.classList.add('active');
-                    
-                    // 淡入效果
-                    setTimeout(() => {
-                        sectionElement.classList.add('fade-in');
-                    }, 10);
                 });
-            }
+            }, { threshold: 0.1 });
             
-            // 初始化状态
-            document.getElementById('tab-overview').click();
-            
-            // 进度条动画
-            document.querySelectorAll('.bar').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 300);
+            sections.forEach(section => {
+                observer.observe(section);
             });
+        });
+        
+        // Charts
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+            }
+        };
+        
+        // Post-Election S&P 500 Chart
+        new Chart(document.getElementById('electionChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: '平均后选举年',
+                        data: [100, 99, 97, 96, 98, 97, 95, 93, 92, 91, 93, 95],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: '2025年',
+                        data: [100, 97, 92, 89, 86, 83, 80, 78, 77, null, null, null],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: chartOptions
+        });
+        
+        // NASDAQ Chart
+        new Chart(document.getElementById('nasdaqChart'), {
+            type: 'line',
+            data: {
+                labels: ['2022', '2023', 'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025'],
+                datasets: [{
+                    label: 'NASDAQ指数',
+                    data: [10788, 14509, 16346, 16908, 17478, 18040, 17468],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    pointRadius: 4,
+                    pointBackgroundColor: 'rgb(75, 192, 192)'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 17468,
+                                yMax: 17468,
+                                borderColor: 'rgb(255, 99, 132)',
+                                borderWidth: 2,
+                                label: {
+                                    content: '当前',
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Growth Distribution Chart
+        new Chart(document.getElementById('growthDistributionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['<0%', '0-5%', '5-10%', '10-15%', '15-20%', '>20%'],
+                datasets: [{
+                    label: 'S&P 500科技公司比例',
+                    data: [5, 25, 30, 20, 11, 9],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(255, 205, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(153, 102, 255, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '公司比例 (%)'
+                        },
+                        max: 35,
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '收入增长率'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // NTM Revenue Chart
+        new Chart(document.getElementById('ntmRevenueChart'), {
+            type: 'bar',
+            data: {
+                labels: ['顶级公司', '其他公司'],
+                datasets: [{
+                    label: 'NTM收入倍数',
+                    data: [14.7, 4.7],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 99, 132, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Market Cap Chart
+        new Chart(document.getElementById('marketCapChart'), {
+            type: 'bar',
+            data: {
+                labels: ['顶级公司', '其他公司'],
+                datasets: [{
+                    label: '中位数市值 ($B)',
+                    data: [80.9, 3.0],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 99, 132, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Revenue Growth Chart
+        new Chart(document.getElementById('revenueGrowthChart'), {
+            type: 'bar',
+            data: {
+                labels: ['顶级公司', '其他公司'],
+                datasets: [{
+                    label: '中位数收入增长 (%)',
+                    data: [30, 10],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 99, 132, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // FCF Margin Chart
+        new Chart(document.getElementById('fcfMarginChart'), {
+            type: 'bar',
+            data: {
+                labels: ['顶级公司', '其他公司'],
+                datasets: [{
+                    label: '中位数FCF利润率 (%)',
+                    data: [25, 10],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 99, 132, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Venture Investment Chart
+        new Chart(document.getElementById('ventureInvestmentChart'), {
+            type: 'line',
+            data: {
+                labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: '风险投资总额 ($B)',
+                    data: [83, 121, 138, 164, 329, 227, 173, 191],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                ...chartOptions,
+                annotations: {
+                    annotations: [
+                        {
+                            type: 'line',
+                            mode: 'vertical',
+                            scaleID: 'x',
+                            value: '2021',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            label: {
+                                content: '峰值',
+                                enabled: true
+                            }
+                        },
+                        {
+                            type: 'line',
+                            mode: 'vertical',
+                            scaleID: 'x',
+                            value: '2023',
+                            borderColor: 'green',
+                            borderWidth: 2,
+                            label: {
+                                content: '低谷',
+                                enabled: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        
+        // Quota Attainment Chart
+        new Chart(document.getElementById('quotaAttainmentChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Q4 2021', 'Q4 2022', 'Q4 2023', 'Q4 2024'],
+                datasets: [{
+                    label: '配额达成率 (%)',
+                    data: [53, 23, 29, 57],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(75, 192, 192)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 60
+                    }
+                }
+            }
+        });
+        
+        // AI Deals Chart
+        new Chart(document.getElementById('aiDealsChart'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'AI交易比例 (%)',
+                    data: [10, 15, 23, 35, 52, 65],
+                    fill: false,
+                    borderColor: 'rgb(153, 102, 255)',
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // YC AI Chart
+        new Chart(document.getElementById('ycAIChart'), {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'YC AI公司比例 (%)',
+                    data: [5, 7, 12, 15, 23, 35, 42, 49],
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // DPI Chart
+        new Chart(document.getElementById('dpiChart'), {
+            type: 'line',
+            data: {
+                labels: ['成立1年', '成立2年', '成立3年', '成立4年', '成立5年'],
+                datasets: [
+                    {
+                        label: '2017',
+                        data: [5, 15, 25, 37, 59],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '2018',
+                        data: [4, 12, 19, 35, 50],
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '2019',
+                        data: [3, 10, 24, 35, 39],
+                        fill: false,
+                        borderColor: 'rgb(153, 102, 255)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '2020',
+                        data: [2, 8, 16, 21, null],
+                        fill: false,
+                        borderColor: 'rgb(255, 159, 64)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '2021',
+                        data: [1, 5, 9, null, null],
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'DPI > 0的基金百分比'
+                        },
+                        max: 70
+                    }
+                }
+            }
+        });
+        
+        // Tech IPO Chart
+        new Chart(document.getElementById('techIPOChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025E'],
+                datasets: [{
+                    label: '科技IPO数量',
+                    data: [42, 37, 96, 162, 16, 23, 31, 45],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Tech M&A Chart
+        new Chart(document.getElementById('techMAChart'), {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025E'],
+                datasets: [{
+                    label: '全球科技并购规模 ($B)',
+                    data: [450, 475, 420, 580, 320, 280, 310, 465],
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                xMin: 6,
+                                xMax: 6,
+                                borderColor: 'rgb(75, 192, 192)',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Lina Khan卸任',
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Platform Shift Chart
+        new Chart(document.getElementById('platformShiftChart'), {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7'],
+                datasets: [
+                    {
+                        label: '思科 (1994-2000)',
+                        data: [100, 270, 540, 830, 1220, 1620, 1831],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'AWS (2013-2019)',
+                        data: [100, 240, 420, 610, 790, 940, 1049],
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'NVIDIA (2019-2025)',
+                        data: [100, 320, 650, 980, 1320, 1590, 1736],
+                        fill: false,
+                        borderColor: 'rgb(153, 102, 255)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '指数化年度收入增长'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '年份'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // CapEx Chart
+        new Chart(document.getElementById('capexChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025E', '2026E'],
+                datasets: [
+                    {
+                        label: '公司A',
+                        data: [30, 42, 58, 84],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '公司B',
+                        data: [25, 35, 48, 68],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '公司C',
+                        data: [22, 32, 44, 59],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '公司D',
+                        data: [19, 26, 36, 48],
+                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                        borderColor: 'rgb(153, 102, 255)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '公司E',
+                        data: [12, 15, 17, 21],
+                        backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                        borderColor: 'rgb(255, 159, 64)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '年度资本支出 ($B)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // AI Budget Chart
+        new Chart(document.getElementById('aiBudgetChart'), {
+            type: 'bar',
+            data: {
+                labels: ['未来1年', '未来3年'],
+                datasets: [{
+                    label: 'GenAI预算分配 (%)',
+                    data: [7, 21],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(153, 102, 255, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 25
+                    }
+                }
+            }
+        });
+        
+        // AI Market Chart
+        new Chart(document.getElementById('aiMarketChart'), {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025E', '2026E', '2027E', '2028E'],
+                datasets: [
+                    {
+                        label: '全球软件支出 ($B)',
+                        data: [1400, 1600, 1830, 2080, 2380, 2710],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '生成式AI企业软件支出 ($B)',
+                        data: [30, 90, 168, 245, 321, 401],
+                        fill: false,
+                        borderColor: 'rgb(153, 102, 255)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: chartOptions
         });
     </script>
 
